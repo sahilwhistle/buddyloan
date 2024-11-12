@@ -44,7 +44,7 @@ const AppCard: React.FC<AppCardProps> = ({
                 width={10}
                 height={10}
                 src={'https://via.placeholder.com/20'}
-                className='w-[12px] h-[12px] sm:w-[14px] h-[14px]'
+                className='w-[12px] h-[12px] sm:w-[14px] sm:h-[14px]'
                 alt='Refresh Icon'
               />
             </span>

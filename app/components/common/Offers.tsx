@@ -47,7 +47,7 @@ const Offers: React.FC<OffersProps> = ({ offersType, productImage,
             <div className='flex items-baseline'>
               <span className='font-medium text-[12px] mr-1'>ROI</span>
               <span className='font-medium text-[12px]'>:</span>
-              <span className='font-medium text-[12px] font-bold'>{offerROI}</span>
+              <span className='text-[12px] font-bold'>{offerROI}</span>
             </div>
             <div className='flex items-baseline'>
               <span className='font-medium text-[12px] mr-1'>Earning</span>
