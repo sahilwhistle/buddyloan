@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-const ConfirmationCard: React.FC = () => {
+const Confirmation: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-72 p-6 bg-white rounded-xl shadow-lg text-center relative">
@@ -29,4 +29,4 @@ const ConfirmationCard: React.FC = () => {
   );
 };
 
-export default ConfirmationCard;
+export default Confirmation;
