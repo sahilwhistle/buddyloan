@@ -8,9 +8,9 @@ interface AppCardProps {
   company: string;
   updateDate: string;
   loanTenure?: string;
-  interestRate?: string;
-  loanAmount?: string;
-  applicationDate?: string
+  interestRate?: string|number;
+  loanAmount?: string|number;
+  applicationDate?: string|null|undefined
 }
 const AppCard: React.FC<AppCardProps> = ({
   companyIcons,
@@ -22,7 +22,7 @@ const AppCard: React.FC<AppCardProps> = ({
   applicationDate
 }) => {
   return (
-    <div className='rounded-md shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)]'>
+    <div className='rounded-md shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] my-2'>
       {/* card header */}
       <div className='bg-gradient-to-r from-[#FFC87A] to-[#FFFFFF] flex justify-between p-2 items-center'>
         <div>

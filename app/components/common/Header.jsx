@@ -1,5 +1,6 @@
 // LIBS
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const Header = () => {
@@ -8,13 +9,14 @@ const Header = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const menuItems = [
-    { id: 1, href: "#", icon: "/assets/img/home.png", alt: "Home", label: "Home" },
+    { id: 1, href: "#", icon: "/assets/img/home.png", alt: "Home", label: "Home" , url:'/'}, // need to update this url
     {
       id: 2,
       href: "#",
       icon: "/assets/img/create.png",
       alt: "Create Lead",
       label: "Create Lead",
+      url:'/lead'
     },
     {
       id: 3,
@@ -22,6 +24,7 @@ const Header = () => {
       icon: "/assets/img/earnings.png",
       alt: "My Earnings",
       label: "My Earnings",
+      url:'/earnings'
     },
     {
       id: 4,
@@ -29,6 +32,7 @@ const Header = () => {
       icon: "/assets/img/transections.png",
       alt: "Transactions",
       label: "Transactions",
+      url:'/transactions'
     },
     {
       id: 5,
@@ -36,6 +40,7 @@ const Header = () => {
       icon: "/assets/img/status.png",
       alt: "Loan Status",
       label: "Loan Status",
+      url:'/loan-status'
     },
     {
       id: 6,
@@ -43,6 +48,7 @@ const Header = () => {
       icon: "/assets/img/terms.png",
       alt: "Terms & Conditions",
       label: "Terms & Conditions",
+      url:'/term-condition'
     },
     {
       id: 7,
@@ -50,6 +56,7 @@ const Header = () => {
       icon: "/assets/img/about-us.png",
       alt: "About Us",
       label: "About Us",
+      url:'/about-us'
     },
     {
       id: 8,
@@ -57,11 +64,12 @@ const Header = () => {
       icon: "/assets/img/logout.png",
       alt: "Logout",
       label: "Logout",
-    },
+      url:'/logout'
+    }, // here we have make a function instead of url
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="">
       <div className="h-full w-full bg-white">
         <div className="flex justify-between items-center h-16 bg-white px-4 shadow-md">
           <div onClick={toggleSidebar}>
@@ -114,7 +122,7 @@ const Header = () => {
               <span className="text-[#49B7F2] text-[8.71px] font-medium leading-[13.38px] text-left flex gap-1">
                 Update Profile
                 <img
-                  src="assets/edit.png"
+                  src="/assets/img/profile.png"
                   alt="Edit"
                   className="w-[10.15px] h-[10.15px]"
                 />
@@ -127,8 +135,8 @@ const Header = () => {
                   key={item.id}
                   className="border-t border-gray-300 py-5 px-5 w-full"
                 >
-                  <a
-                    href={item.href}
+                  <Link
+                    href={item.url}
                     className="flex items-center text-lg text-gray-800 hover:text-blue-500"
                   >
                     <img
@@ -139,7 +147,7 @@ const Header = () => {
                     <h3 className="font-poppins text-md font-medium leading-[16.91px] text-left decoration-none">
                       {item.label}
                     </h3>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

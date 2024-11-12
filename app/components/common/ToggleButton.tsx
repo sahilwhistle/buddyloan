@@ -1,36 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface ToggleButtonGroupProps {
-  selectedMethod: 'salaried' | 'selfEmployed';
-  setSelectedMethod: (method: 'salaried' | 'selfEmployed') => void;
+  options: { label: string; value: string }[]; 
+  selectedValue: string; 
+  setSelectedValue: (value: string) => void; 
 }
 
-const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({ selectedMethod, setSelectedMethod}) => {
+const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({ options, selectedValue, setSelectedValue }) => {
   return (
-    <div className="mb-6 flex justify-center border-[1px] bg-white border-blue rounded-[30px] border-[#253C82] h-[55px] w-[30%]">
-      <div
-        onClick={() => setSelectedMethod("salaried")}
-        className={`font-bold w-[250px] cursor-pointer rounded-l-full rounded-r-full px-4 py-3 ${
-          selectedMethod === "salaried"
-            ? "text-center bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white-500"
-            : "text-center bg-white text-[#253C82]"
-        }`}
-      >
-        Salaried
-      </div>
-      <div
-        onClick={() => setSelectedMethod("selfEmployed")}
-        className={`font-bold w-[250px] cursor-pointer rounded-l-full rounded-r-full px-4 py-3 ${
-          selectedMethod === "selfEmployed"
-            ? "text-center bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white-500"
-            : "text-center bg-white text-[#253C82]"
-        }`}
-      >
-        Self Employed
-      </div>
+    <div className="mb-6 flex justify-center border-[1px] bg-white border-blue rounded-[30px] border-[#253C82] h-[55px] w-[60%]">
+      {options.map((option, index) => (
+        <div
+          key={option.value}
+          onClick={() => setSelectedValue(option.value)}
+          className={`font-bold w-full cursor-pointer px-4 py-3 rounded-full ${
+            selectedValue === option.value
+              ? "bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white"
+              : "bg-white text-[#253C82]"
+          } ${index === 0 ? 'rounded-l-full' : ''} ${index === options.length - 1 ? 'rounded-r-full' : ''}`}
+        >
+          {option.label}
+        </div>
+      ))}
     </div>
   );
 };
 
 export default ToggleButtonGroup;
-

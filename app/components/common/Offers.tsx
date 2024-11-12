@@ -17,7 +17,7 @@ const Offers: React.FC<OffersProps> = ({ offersType, productImage,
   offerEarning,
 }) => {
   return (
-    <div className='shadow-md p-2 rounded-md border-[#D9D9D9] border-2'>
+    <div className='shadow-md p-2 rounded-md border-[#D9D9D9] border-2 my-2'>
       <span className='px-4 py-1 shadow-[0px_0px_0.83px_0px_rgba(0,0,0,0.25)] border-[#EFFFE7] text-[9px] rounded-xl my-1'>
         {offersType}
       </span>
