@@ -79,7 +79,7 @@ const Registration = () => {
       </h3>
 
       {/* Registration Form */}
-      <div className="reg-form-wrapper p-4 mt-5 bg-white rounded-lg">
+      <div className=" p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
         <h4 className="title text-base font-medium text-gray-400 flex justify-center items-center font-poppins">
           Enter your details
         </h4>
@@ -133,7 +133,7 @@ const Registration = () => {
           {/* Pincode */}
           <div className="py-3 mt-3">
             <Input
-              type="number"
+              type="text"
               placeholder="Pincode"
               value={formData.pincode}
               onChange={handleChange("pincode")}
@@ -200,9 +200,6 @@ const Registration = () => {
           )}
 
           {/* Submit Button */}
-          {/* <div>
-            <Button label="submit" type="submit" />
-          </div> */}
           <div className="py-3 flex justify-center">
             <button
               type="submit"
