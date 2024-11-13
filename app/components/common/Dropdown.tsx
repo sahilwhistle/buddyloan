@@ -33,7 +33,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {/* Dropdown Button */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center w-full p-3 mt-2 border rounded-lg cursor-pointer ${
+        className={`flex items-center w-full px-3 h-[47.47px] mt-2 border rounded-lg cursor-pointer ${
           error ? "border-red-500" : "border-[#47B6F2]"
         } focus:outline-none focus:ring-2 focus:ring-[#47B6F2]`}
       >
