@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface ToggleButtonGroupProps {
-  options: { label: string; value: string }[]; 
-  selectedValue: string; 
-  setSelectedValue: (value: string) => void; 
+  options: { label: string; value: string }[];
+  selectedValue: string;
+  setSelectedValue: (value: string) => void;
 }
 
-const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({ options, selectedValue, setSelectedValue }) => {
+const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
+  options,
+  selectedValue,
+  setSelectedValue,
+}) => {
   return (
-    <div className="mb-6 flex justify-center border-[1px] bg-white border-blue rounded-[30px] border-[#253C82] h-[55px] w-[60%]">
+    <div className="mb-6 flex justify-center border-[1px] bg-white border-blue rounded-[30px] border-[#253C82] h-[55px]">
       {options.map((option, index) => (
         <div
           key={option.value}
           onClick={() => setSelectedValue(option.value)}
-          className={`font-bold w-full cursor-pointer px-4 py-3 rounded-full ${
+          className={`flex items-center justify-center text-center font-bold w-full cursor-pointer px-4 py-3 rounded-full ${
             selectedValue === option.value
               ? "bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white"
               : "bg-white text-[#253C82]"
-          } ${index === 0 ? 'rounded-l-full' : ''} ${index === options.length - 1 ? 'rounded-r-full' : ''}`}
+          } ${index === 0 ? "rounded-l-full" : ""} ${
+            index === options.length - 1 ? "rounded-r-full" : ""
+          }`}
         >
           {option.label}
         </div>
