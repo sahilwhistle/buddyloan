@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Input from "../components/forms/Input";
 import Dropdown from "../components/common/Dropdown";
-import Button from "../components/forms/Button";
 
 const Registration = () => {
   // State object to hold all form data
