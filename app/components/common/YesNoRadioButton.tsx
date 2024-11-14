@@ -7,6 +7,7 @@ interface YesNoRadioProps {
   label?: string;
   disabled?: boolean;
   required?: boolean;
+  extraLabel?: String;
 }
 
 const YesNoRadio: React.FC<YesNoRadioProps> = ({
@@ -16,9 +17,10 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
   label,
   disabled = false,
   required = false,
+  extraLabel,
 }) => {
   return (
-    <div className="w-full max-w-md px-10">
+    <div className="w-full max-w-md px-5">
       {label && (
         <label className="block text-sm font-medium text-b-blue mb-2">
           {label}
@@ -26,6 +28,9 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
         </label>
       )}
       <div className="flex justify-between items-center">
+        {/* Extra lable */}
+        {extraLabel && <div className="text-[#A8A7A7]">{extraLabel}</div>}
+
         <div className="flex items-center">
           <input
             type="radio"
@@ -46,8 +51,8 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
           <label
             htmlFor={`${name}-yes`}
             className={`ml-2 text-sm font-medium text-b-blue ${
-              disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-            }`}
+              value === "yes" ? "text-b-blue" : "text-gray-400"
+            } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             Yes
           </label>
@@ -71,9 +76,9 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
           />
           <label
             htmlFor={`${name}-no`}
-            className={`ml-2 text-sm font-medium text-b-blue ${
-              disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-            }`}
+            className={`ml-2 text-sm font-medium text-b-blue  ${
+              value === "no" ? "text-b-blue" : "text-gray-400"
+            } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
             No
           </label>

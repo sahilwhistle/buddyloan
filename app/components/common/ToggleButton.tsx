@@ -17,7 +17,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
         <div
           key={option.value}
           onClick={() => setSelectedValue(option.value)}
-          className={`flex items-center justify-center text-center font-bold w-full cursor-pointer rounded-full ${
+          className={`flex items-center justify-center text-center font-medium w-full cursor-pointer rounded-full ${
             selectedValue === option.value
               ? "bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white"
               : "bg-white text-[#253C82]"
