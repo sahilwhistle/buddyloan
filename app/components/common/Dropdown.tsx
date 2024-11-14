@@ -26,7 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className="relative w-full">
       {/* Label overlapping the border */}
-      <span className="absolute top-0 left-3 px-1 text-[#47B6F2] bg-white transform -translate-y-1/2 pointer-events-none">
+      <span className="absolute top-0 left-3 px-1 text-[#47B6F2] bg-white transform -translate-y-1/2 pointer-events-none poppins">
         {label}
       </span>
 
@@ -38,9 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         } focus:outline-none focus:ring-2 focus:ring-[#47B6F2]`}
       >
         {/* Display the selected value if there is one */}
-        <span className="flex-grow text-[#47B6F2]">
-          {selected || "Select an option"}
-        </span>
+        <span className="flex-grow text-[#47B6F2] poppins">{selected}</span>
 
         <button className="ml-auto flex items-center justify-center w-7 h-7 bg-[#47B6F2] text-white rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-[#47B6F2]">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

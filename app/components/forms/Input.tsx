@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({
     <div className="relative w-full mb-4">
       <input
         type={type}
-        className={`w-full h-[47.47px] border-[1px] rounded-[12px] ${
+        className={`w-full h-[47.47px] border-[1px] px-3 poppins rounded-[12px] ${
           error ? "border-red-500" : "border-[#47B6F2]"
         } outline-none focus:ring-0 text-black`} // Ensures text color is black
         placeholder=" "
