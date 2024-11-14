@@ -26,14 +26,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className="relative w-full">
       {/* Label overlapping the border */}
-      <span className="absolute -top-2 left-3 px-1 bg-white text-[#47B6F2] text-sm">
+      <span className="absolute top-0 left-3 px-1 text-[#47B6F2] bg-white transform -translate-y-1/2 pointer-events-none">
         {label}
       </span>
 
       {/* Dropdown Button */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center w-full px-3 h-[47.47px] mt-2 border rounded-lg cursor-pointer ${
+        className={`flex items-center w-full px-3 h-[47.47px] mt-2 border rounded-[12px] cursor-pointer ${
           error ? "border-red-500" : "border-[#47B6F2]"
         } focus:outline-none focus:ring-2 focus:ring-[#47B6F2]`}
       >

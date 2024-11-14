@@ -97,12 +97,12 @@ const CalendarInput: FC<CalendarInputProps> = ({
 
   return (
     <div className="relative w-full" ref={calendarRef}>
-      <span className="absolute -top-2 left-3 px-1 bg-white text-sm text-b-blue">
+      <span className="absolute top-0 left-3 px-1 text-[#47B6F2] bg-white transform -translate-y-1/2 pointer-events-none">
         {label}
       </span>
 
       <div
-        className={`flex items-center w-full p-2 mt-2 border rounded-lg focus:outline-none border-b-blue`}
+        className={`flex items-center w-full p-3 mt-2 border rounded-[12px] focus:outline-none border-b-blue`}
       >
         <span className="text-gray-700">{formatDate(selectedDate)}</span>
         <button

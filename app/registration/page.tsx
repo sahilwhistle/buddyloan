@@ -211,7 +211,7 @@ const Registration = () => {
           <div className="py-3 flex justify-center">
             <button
               type="submit"
-              className="w-[200px] py-4 px-4 bg-b-blue text-white font-poppins text-sm font-semibold rounded-xl"
+              className="w-[200px] py-2 px-2 bg-b-blue text-white font-poppins text-lg font-semibold rounded-xl"
             >
               Submit
             </button>
