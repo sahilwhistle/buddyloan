@@ -69,7 +69,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="">
+    <div className="fixed z-[9999] w-full">
       <div className="h-full w-full bg-white">
         <div className="flex justify-between items-center h-16 bg-white px-4 shadow-md">
           <div onClick={toggleSidebar}>
@@ -122,7 +122,7 @@ const Header = () => {
               <span className="text-[#49B7F2] text-[8.71px] font-medium leading-[13.38px] text-left flex gap-1">
                 Update Profile
                 <img
-                  src="/assets/img/profile.png"
+                  src="/assets/img/edit.png"
                   alt="Edit"
                   className="w-[10.15px] h-[10.15px]"
                 />
