@@ -12,7 +12,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'email-blue': '#00A6FF', 
+        'b-blue': '#00A6FF', 
       },
       fontFamily: {
         sans: ['var(--font-poppins)', ...fontFamily.sans],

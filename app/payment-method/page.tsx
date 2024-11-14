@@ -150,7 +150,7 @@ const PaymentMethod = () => {
           <div className="py-3 flex justify-center">
             <button
               type="submit"
-              className="w-[200px] py-[16px] px-4 bg-email-blue text-white font-poppins text-sm font-semibold rounded-xl"
+              className="w-[200px] py-[16px] px-4 bg-b-blue text-white font-poppins text-sm font-semibold rounded-xl"
             >
               Add Payout Method
             </button>

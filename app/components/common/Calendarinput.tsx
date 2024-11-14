@@ -1,52 +1,179 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState, useRef, useEffect, FC } from "react";
 
-const CustomCalendar: React.FC = () => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
+interface CalendarInputProps {
+  label?: string;
+  selectedDate?: Date | null;
+  onDateChange?: (date: Date | null) => void;
+}
+
+const CalendarInput: FC<CalendarInputProps> = ({
+  label,
+  selectedDate: initialSelectedDate = null,
+  onDateChange,
+}) => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    initialSelectedDate
+  );
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [isOpen, setIsOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const daysInWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const years = Array.from(
+    { length: 101 },
+    (_, i) => i + (new Date().getFullYear() - 50)
+  ); // Range of 50 years back and forward
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const getDaysInMonth = (month: number, year: number) =>
+    new Date(year, month + 1, 0).getDate();
+  const getFirstDayOfMonth = (month: number, year: number) =>
+    new Date(year, month, 1).getDay();
+
+  const generateDates = () => {
+    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
+    const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+    const dates = Array(firstDay).fill(null);
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      dates.push(i);
+    }
+    return dates;
+  };
+
+  const handleDateSelect = (day: number | null) => {
+    if (day) {
+      const newDate = new Date(currentYear, currentMonth, day);
+      setSelectedDate(newDate);
+      onDateChange && onDateChange(newDate);
+      setIsOpen(false);
+    }
+  };
+
+  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentMonth(parseInt(event.target.value));
+  };
+
+  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentYear(parseInt(event.target.value));
+  };
+
+  const formatDate = (date: Date | null) => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
   return (
-    <div className="relative w-64">
-      {/* Label overlapping the border */}
-      <span className="absolute -top-2 left-3 px-1 bg-white text-[#47B6F2] text-sm">
-        Tenure
+    <div className="relative w-full" ref={calendarRef}>
+      <span className="absolute -top-2 left-3 px-1 bg-white text-sm text-b-blue">
+        {label}
       </span>
 
-      {/* Input field with calendar button */}
-      <div className="flex items-center w-full p-2 mt-2 border border-[#47B6F2] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#47B6F2]">
-        {/* Calendar Icon Button */}
+      <div
+        className={`flex items-center w-full p-2 mt-2 border rounded-lg focus:outline-none border-b-blue`}
+      >
+        <span className="text-gray-700">{formatDate(selectedDate)}</span>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="ml-auto flex items-center justify-center w-7 h-7 bg-[#47B6F2] text-white rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-[#47B6F2]"
+          className="ml-auto flex items-center justify-center"
         >
-          <svg
-            className="w-4 h-4"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm-9-9h2v2H10zm0 4h2v2H10zm4-4h2v2h-2zm0 4h2v2h-2z"
-            />
-          </svg>
+          <img src="/assets/img/calendar.png" className="h-[22px] w-[22px]" />
         </button>
       </div>
 
-      {/* Date Picker */}
       {isOpen && (
-        <div className="absolute w-full mt-1 bg-white border border-[#47B6F2] rounded-lg shadow-lg z-10">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              setStartDate(date);
-              setIsOpen(false); // Close the calendar after selecting a date
-            }}
-            inline
-          />
+        <div className="absolute w-full mt-1 bg-white border border-b-blue rounded-lg shadow-lg z-10 p-4">
+          <div className="flex justify-between items-center mb-4">
+            <select
+              value={currentMonth}
+              onChange={handleMonthChange}
+              className="p-1 border rounded text-gray-700"
+            >
+              {months.map((month, index) => (
+                <option key={month} value={index}>
+                  {month}
+                </option>
+              ))}
+            </select>
+            <select
+              value={currentYear}
+              onChange={handleYearChange}
+              className="p-1 border rounded text-gray-700"
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="grid grid-cols-7 gap-1">
+            {daysInWeek.map((day) => (
+              <div
+                key={day}
+                className="text-center text-sm font-medium text-gray-500 mb-2"
+              >
+                {day}
+              </div>
+            ))}
+            {generateDates().map((day, index) => (
+              <button
+                key={index}
+                className={`h-8 w-8 text-sm rounded-full flex items-center justify-center
+                  ${!day ? "invisible" : "hover:bg-gray-100"}
+                  ${
+                    selectedDate &&
+                    day === selectedDate.getDate() &&
+                    currentMonth === selectedDate.getMonth() &&
+                    currentYear === selectedDate.getFullYear()
+                      ? "bg-b-blue text-white"
+                      : "text-gray-700"
+                  }
+                `}
+                onClick={() => handleDateSelect(day)}
+                disabled={!day}
+              >
+                {day}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default CustomCalendar;
+export default CalendarInput;

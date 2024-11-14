@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Input from "../components/forms/Input";
 import Dropdown from "../components/common/Dropdown";
+import CalendarInput from "../components/common/Calendarinput";
 
 const Registration = () => {
   // State object to hold all form data
@@ -31,6 +32,14 @@ const Registration = () => {
         [field]: e.target.value,
       });
     };
+
+  // Callback to handle date change
+  const handleDateChange = (field: string, date: Date | null) => {
+    setFormData({
+      ...formData,
+      [field]: date,
+    });
+  };
 
   const handleDropdownChange = (value: string) => {
     setFormData({
@@ -106,16 +115,16 @@ const Registration = () => {
 
           {/* Date of Birth */}
           <div className="py-3">
-            <Input
-              type="date"
-              placeholder="Calendar"
-              value={formData.dob}
-              onChange={handleChange("dob")}
+            <CalendarInput
+              label="Select Date"
+              onDateChange={(date) => {
+                handleDateChange("dob", date);
+              }}
             />
           </div>
 
           {/* Dropdown for Tenure */}
-          <div className="py-2">
+          <div className="py-4">
             <Dropdown
               label="Select Tenure"
               options={["Option 1", "Option 2", "Option 3"]}
@@ -167,7 +176,7 @@ const Registration = () => {
               {isTimerActive ? (
                 <>
                   <div className="flex flex-col items-center mt-1">
-                    <span className="font-poppins text-xs font-medium text-email-blue mt-1 text-center">
+                    <span className="font-poppins text-xs font-medium text-b-blue mt-1 text-center">
                       {timer}s
                     </span>
                     <span className="font-poppins text-xs font-medium text-gray-500">
@@ -178,7 +187,7 @@ const Registration = () => {
               ) : (
                 <span
                   onClick={handleSendOTP}
-                  className="font-poppins text-xs font-medium text-email-blue cursor-pointer"
+                  className="font-poppins text-xs font-medium text-b-blue cursor-pointer"
                 >
                   Send Email OTP
                 </span>
@@ -202,7 +211,7 @@ const Registration = () => {
           <div className="py-3 flex justify-center">
             <button
               type="submit"
-              className="w-[200px] py-4 px-4 bg-email-blue text-white font-poppins text-sm font-semibold rounded-xl"
+              className="w-[200px] py-4 px-4 bg-b-blue text-white font-poppins text-sm font-semibold rounded-xl"
             >
               Submit
             </button>
