@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../components/forms/Input";
 import PaymentsToggle from "../components/common/PaymentsToogle";
 import Table from "../components/common/Table";
+import BalanceCard from "../components/common/BalenceCard";
 
 const Transections = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
@@ -92,26 +93,25 @@ const Transections = () => {
   ];
 
   const tableData = [
-    { Date: "2024-11-15", Amount: "$100", "Transfer Status": "Success" },
-    { Date: "2024-11-14", Amount: "$200", "Transfer Status": "Pending" },
+    {
+      headers: ["Date", "Amount", "Transfer Status"],
+      rows: [
+        { Date: "2024-11-15", Amount: "$100", "Transfer Status": "Success" },
+        { Date: "2024-11-14", Amount: "$200", "Transfer Status": "Pending" },
+      ],
+    },
   ];
 
   return (
     <div className="min-h-screen p-4 bg-white">
       <div className="max-w-sm mx-auto">
         {/* Header Banner */}
-        <div className="mt-[80px] flex h-[120px] w-full items-center justify-around rounded-[20px] bg-[#00A6FF] shadow-[0px_0px_4px_0px_#00000040]">
-          <div className="flex flex-col justify-center items-center text-center text-[16px] leading-[50px] text-white">
-            <span>Validated Balance</span>
-            <span className="text-[36px] font-extrabold">₹150</span>
-          </div>
-          {/* Vertical line */}
-          <div className="h-24 border-l-2 border-white"></div>
-          <div className="flex flex-col justify-center items-center text-center text-[16px] leading-[50px] text-white">
-            <span> Reviewing Balance</span>
-            <span className="text-[36px] font-extrabold">₹0</span>
-          </div>
-        </div>
+        <BalanceCard
+          labelOne="Validated Balance"
+          labelOneBalance={150}
+          labelTwo="Validated Balance"
+          labelTwoBalance={0}
+        />
 
         {/* Heading */}
         <h4 className="py-2 mt-3 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
