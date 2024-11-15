@@ -15,9 +15,7 @@ const PaymentMethod: React.FC = () => {
   const handleSelectionChange = (value: string) => setSelect(value);
 
   return (
-    <div
-      className={`${select === "upi" ? "h-[100vh]" : "h-full"} p-4 bg-white`}
-    >
+    <div className="min-h-screen p-4 bg-white">
       <h3 className="mt-[100px] mb-[40px] font-poppins text-2xl font-semibold leading-[30.88px] text-center text-[#253C82]">
         Select Payout Method
       </h3>
