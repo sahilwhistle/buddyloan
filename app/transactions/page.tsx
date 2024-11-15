@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Input from "../components/forms/Input";
-import TableHeader from "../components/common/TableHeader";
 import PaymentsToggle from "../components/common/PaymentsToogle";
+import Table from "../components/common/Table";
 
 const Transections = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
@@ -89,6 +89,11 @@ const Transections = () => {
       bankName: "UPI",
       bankAccountNumber: "XXXXXXXXXX6438",
     },
+  ];
+
+  const tableData = [
+    { Date: "2024-11-15", Amount: "$100", "Transfer Status": "Success" },
+    { Date: "2024-11-14", Amount: "$200", "Transfer Status": "Pending" },
   ];
 
   return (
@@ -187,12 +192,8 @@ const Transections = () => {
           Payment History
         </h4>
 
-        <TableHeader headers={["Date", "Amount", "Transfer Status"]} />
-
-        {/* No History */}
-        <div className="mt-[20px] p-[10px] h-[100px] flex justify-center items-center text-sm w-full rounded-[20px] bg-white p-[23px] text-center shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] text-black">
-          No History Found
-        </div>
+        {/* Payment History Table */}
+        <Table data={tableData} />
       </div>
     </div>
   );
