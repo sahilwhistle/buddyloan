@@ -1,24 +1,32 @@
+"use-client";
 // mock/paymentdata.js
 const bankData = [
   {
     id: 1,
-    imageUrl: "https://example.com/image1.jpg",
+    img: "/assets/img/corporation-bank.png",
     bankName: "Bank of America",
-    bankAccountNumber: "1234567890",
+    bankAccountNumber: "XXXXXXXXXX6438",
     amount: "9876543",
   },
   {
     id: 2,
-    imageUrl: "https://example.com/image2.jpg",
+    img: "/assets/img/corporation-bank.png",
     bankName: "Chase Bank",
-    bankAccountNumber: "9876543210",
+    bankAccountNumber: "XXXXXXXXXX6438",
     amount: "9876543",
   },
   {
     id: 3,
-    imageUrl: "https://example.com/image3.jpg",
+    img: "/assets/img/corporation-bank.png",
     bankName: "Wells Fargo",
-    bankAccountNumber: "1122334455",
+    bankAccountNumber: "XXXXXXXXXX6438",
+    amount: "9876543",
+  },
+  {
+    id: 4,
+    img: "/assets/img/corporation-bank.png",
+    bankName: "Wells Fargo",
+    bankAccountNumber: "XXXXXXXXXX6438",
     amount: "9876543",
   },
 ];

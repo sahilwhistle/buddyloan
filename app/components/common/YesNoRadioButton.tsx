@@ -1,17 +1,18 @@
-import React from "react";
+"use client";
+import React, { useId } from "react";
 
 interface YesNoRadioProps {
-  name?: string;
+  name: string; // Require a unique name for each instance
   value: string;
   onChange: (value: string) => void;
   label?: string;
   disabled?: boolean;
   required?: boolean;
-  extraLabel?: String;
+  extraLabel?: string;
 }
 
-const YesNoRadio: React.FC<YesNoRadioProps> = ({
-  name = "yesNo",
+const YesNoRadioButton: React.FC<YesNoRadioProps> = ({
+  name,
   value,
   onChange,
   label,
@@ -19,6 +20,8 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
   required = false,
   extraLabel,
 }) => {
+  const id = useId();
+
   return (
     <div className="w-full max-w-md px-5">
       {label && (
@@ -28,19 +31,16 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
         </label>
       )}
       <div className="flex justify-between items-center">
-        {/* Extra lable */}
         {extraLabel && <div className="text-[#A8A7A7]">{extraLabel}</div>}
 
         <div className="flex items-center">
           <input
             type="radio"
-            id={`${name}-yes`}
-            name={name}
+            id={`${id}-${name}-yes`}
+            name={name} // Unique name for each instance
             value="yes"
             checked={value === "yes"}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange(e.target.value)
-            }
+            onChange={(e) => onChange(e.target.value)}
             disabled={disabled}
             required={required}
             className={`
@@ -49,8 +49,8 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
             `}
           />
           <label
-            htmlFor={`${name}-yes`}
-            className={`ml-2 text-sm font-medium text-b-blue ${
+            htmlFor={`${id}-${name}-yes`}
+            className={`ml-2 text-sm font-medium ${
               value === "yes" ? "text-b-blue" : "text-gray-400"
             } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
@@ -60,13 +60,11 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
         <div className="flex items-center">
           <input
             type="radio"
-            id={`${name}-no`}
-            name={name}
+            id={`${id}-${name}-no`}
+            name={name} // Unique name for each instance
             value="no"
             checked={value === "no"}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              onChange(e.target.value)
-            }
+            onChange={(e) => onChange(e.target.value)}
             disabled={disabled}
             required={required}
             className={`
@@ -75,8 +73,8 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
             `}
           />
           <label
-            htmlFor={`${name}-no`}
-            className={`ml-2 text-sm font-medium text-b-blue  ${
+            htmlFor={`${id}-${name}-no`}
+            className={`ml-2 text-sm font-medium ${
               value === "no" ? "text-b-blue" : "text-gray-400"
             } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
           >
@@ -88,4 +86,4 @@ const YesNoRadio: React.FC<YesNoRadioProps> = ({
   );
 };
 
-export default YesNoRadio;
+export default YesNoRadioButton;
