@@ -54,7 +54,7 @@ const Earnings = () => {
         />
         <div className="shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] bg-[#47B6F226] mt-[20px] py-1 rounded-[10px]">
           {/* Date */}
-          <div className="py-2 px-5 h-full flex flex-row justify-between items-center bg-transparent text-sm w-full rounded-[8px] bg-white text-center text-black">
+          <div className="py-2 px-5 h-full flex flex-row justify-between items-center bg-transparent text-sm w-full rounded-[8px] text-center text-black">
             <h3 className="text-black text-lg font-semibold">Date</h3>
             <DropdownTwo
               label="All Time"
@@ -65,7 +65,7 @@ const Earnings = () => {
           </div>
 
           {/* Lender */}
-          <div className="py-2 px-5 h-full flex flex-row justify-between items-center bg-transparent text-sm w-full rounded-[8px] bg-white text-center text-black">
+          <div className="py-2 px-5 h-full flex flex-row justify-between items-center bg-transparent text-sm w-full rounded-[8px] text-center text-black">
             <h3 className="text-black text-lg font-semibold">Lender</h3>
             <DropdownTwo
               label="All"
