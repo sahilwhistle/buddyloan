@@ -38,7 +38,6 @@ const Table: React.FC<TableProps> = ({ data, shadow, size }) => {
           </div>
         ))}
       </div>
-
       {/* Table Content */}
       <div className={shadowClass}>
         {rows.length > 0 ? (
@@ -47,14 +46,14 @@ const Table: React.FC<TableProps> = ({ data, shadow, size }) => {
               key={rowIndex}
               className={`flex w-full bg-white text-black ${
                 size ? "text-[10px]" : "text-sm"
-              } rounded-[8px] py-3 px-2 border border-gray-600 mt-2`}
+              } rounded-[8px] py-3 px-2 border border-[#005886] mt-2`}
             >
               {headers.map((title, colIndex) => (
                 <div
                   key={colIndex}
                   className={`flex-1 text-center relative ${
                     colIndex < headers.length - 1
-                      ? "border-r border-gray-400"
+                      ? "border-r border-[#005886]"
                       : ""
                   }`}
                 >
