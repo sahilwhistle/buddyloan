@@ -11,6 +11,7 @@ interface CustomDropdownProps {
   options: DropdownOption[];
   onSelect?: (option: DropdownOption) => void;
   defaultValue?: string;
+  size?: string;
 }
 
 const DropdownTwo: React.FC<CustomDropdownProps> = ({
@@ -18,6 +19,7 @@ const DropdownTwo: React.FC<CustomDropdownProps> = ({
   options,
   onSelect,
   defaultValue,
+  size,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>(defaultValue || label);
@@ -33,9 +35,13 @@ const DropdownTwo: React.FC<CustomDropdownProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="min-w-[120px] text-xs px-6 py-1 flex items-center justify-between text-white rounded-full bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white rounded-[30px] transition-all duration-200"
+        className={`min-w-[120px] text-xs ${
+          size ? "px-[18px]" : "px-6"
+        } py-1 flex items-center justify-between text-white rounded-full bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white rounded-[30px] transition-all duration-200`}
       >
-        <span className="text-sm pe-2">{selected}</span>
+        <span className={`${size ? "text-[12px] py-[2px] " : "text-sm"} pe-2`}>
+          {selected}
+        </span>
         <span
           className={`w-2 h-2 border-r-2 border-b-2 border-white transform rotate-45 transition-transform duration-200 mt-[-4px] ${
             isOpen ? "rotate-[-135deg] mt-1" : ""

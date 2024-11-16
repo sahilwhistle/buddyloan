@@ -1,27 +1,38 @@
 const usersdata = [
-    { 
-        id:1,
-        name: 'John Doe', 
-        mobile: '123-456-7890', 
-        status: 'Active'
-    },
-    { 
-        id:2,
-        name: 'Jane Smith',
-        mobile: '987-654-3210',
-        status: 'Inactive'
-    },
-    { 
-        id:3,
-        name: 'Sam Wilson', 
-        mobile: '555-555-5555', 
-        status: 'Pending'
-    },
-    { 
-        id:4,
-        name: 'Emily Davis', 
-        mobile: '111-222-3333', 
-        status: 'Active' 
-    }
-    ];
-    export default  usersdata;
+  {
+    id: 1,
+    userName: "Sam",
+    phoneNumber: "9898989898",
+    status: "Active",
+    journeyStatus: "Accepted Journery Not Started",
+  },
+  {
+    id: 2,
+    userName: "Jhon",
+    phoneNumber: "9898989898",
+    status: "Active",
+    journeyStatus: "Accepted Journery Documents Pending",
+  },
+  {
+    id: 3,
+    userName: "Rohit",
+    phoneNumber: "9898989898",
+    status: "Active",
+    journeyStatus: "Accepted",
+  },
+  {
+    id: 4,
+    userName: "Abhilash",
+    phoneNumber: "9898989898",
+    status: "Active",
+    journeyStatus: "Ready To Disburse Journery Starts",
+  },
+  {
+    id: 5,
+    userName: "Pradeep",
+    phoneNumber: "9898989898",
+    status: "Active",
+    journeyStatus: "Ready To Disburse Journery Starts",
+  },
+];
+export default usersdata;
