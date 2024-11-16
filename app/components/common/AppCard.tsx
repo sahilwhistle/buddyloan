@@ -1,128 +1,120 @@
 "use client";
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 interface AppCardProps {
-  companyIcons: string;
-  company: string;
-  updateDate: string;
-  loanTenure?: string;
-  interestRate?: string|number;
-  loanAmount?: string|number;
-  applicationDate?: string|null|undefined
+  data: any;
 }
-const AppCard: React.FC<AppCardProps> = ({
-  companyIcons,
-  company,
-  updateDate,
-  loanAmount,
-  interestRate,
-  loanTenure,
-  applicationDate
-}) => {
-  return (
-    <div className='rounded-md shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] my-2'>
-      {/* card header */}
-      <div className='bg-gradient-to-r from-[#FFC87A] to-[#FFFFFF] flex justify-between p-2 items-center'>
-        <div>
-          <Image
-            width={80}
-            height={80}
-            alt='Company Icons'
-            src={companyIcons}
-            className='rounded-full sm:w-[50px] sm:h-[50px] w-[37px] h-[37px]'
-          />
-        </div>
-        <div className='text-[#070707] font-medium text-md'>
-          {company}
-        </div>
-        <div>
-          <span className='text-[#070707] sm:text-[13px] text-[10px] flex font-normal'>Updated On: {updateDate}
-            <span className='ml-1 cursor-pointer'>
-              <Image
-                width={10}
-                height={10}
-                src={'https://via.placeholder.com/20'}
-                className='w-[12px] h-[12px] sm:w-[14px] sm:h-[14px]'
-                alt='Refresh Icon'
-              />
-            </span>
-          </span>
-        </div>
-      </div>
-      {/*card content*/}
-      <div className='flex justify-between p-2'>
-        <div className='flex flex-col'>
-          <>
-            {loanAmount ? <>
-              <div className='text-[#000000] font-semibold text-[12px] sm:text-[14px]'>
-                Loan Amount:
-              </div>
-              <div className='font-normal text-[#000000] text-[12px] sm:text-[14px]'>
-                {loanAmount}
-              </div>
-            </> : ''
-            }
-          </>
-          <>
-            {
-              applicationDate ? <>
-                <div className='text-[#000000] font-semibold text-[12px] sm:text-[14px]'>
-                  Application Date:
-                </div>
-                <div className='font-normal text-[#000000] text-[12px] sm:text-[14px]'>
-                  {applicationDate}
-                </div></> : ''
-            }
-          </>
-        </div>
-        <div className='flex flex-col'>
-          <>{
-            loanTenure ? <>
-              <div className='text-[#000000] font-semibold text-[12px] sm:text-[14px]'>
-                Loan Tenure:
-              </div>
-              <div className='font-normal text-[#000000] text-[12px] sm:text-[14px]'>
-                {loanTenure}
-              </div>
-            </> : ''
-          }
-          </>
-          <>
-            {
-              interestRate ?
-                <>
-                  <div className='text-[#000000] font-semibold text-[12px] sm:text-[14px]'>
-                    Rate Of Interest:
-                  </div>
-                  <div className='font-normal text-[#000000] text-[12px] sm:text-[14px]'>
-                    {interestRate}
-                  </div>
-                </>
-                : ''
-            }
-          </>
-        </div>
-      </div>
-      {/* card bottom */}
-      <div className='flex justify-between p-2 items-center'>
-        <Link
-          href={'/refer'}
-          className='text-[#00A6FF] font-medium text-[9px] sm:text-[12px]'
-        >
-          Refer Document
-        </Link>
-        <button className="flex items-center bg-[linear-gradient(90deg,_#FFC87A_0%,_#FFFFFF_100%)] text-dark px-4 py-2 rounded-full focus:outline-none text-[8px] sm:text-[12px] border border-[#F9A61A]">
-          Accept Journey Not Started
-          <svg className="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
 
+const CardDetail: React.FC<{ label: string; value: string | number }> = ({
+  label,
+  value,
+}) => {
+  if (!value) return null; // Don't render anything if no value
+
+  return (
+    <div className="mb-3">
+      <div className="text-[#000000] font-semibold text-[12px] sm:text-[14px]">
+        {label}:
+      </div>
+      <div className="font-normal text-[#000000] text-[12px] sm:text-[14px]">
+        {value}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AppCard
+const AppCard: React.FC<AppCardProps> = ({ data }) => {
+  return (
+    <>
+      {data?.map((item: any, index: number) => {
+        const {
+          img,
+          company,
+          updateDate,
+          loanAmount,
+          rateOfInterest,
+          loanTenure,
+          applicationDate,
+        } = item;
+
+        return (
+          <div
+            key={index}
+            className="rounded-[10px] overflow-hidden shadow-[0px_0px_3px_0px_rgba(0,_0,_0,_0.25)] my-3"
+          >
+            {/* Card Header */}
+            <div className="bg-gradient-to-r from-[#FFFFFF] to-[#FFC87A] flex justify-between p-1 items-center pe-3">
+              <div>
+                <Image
+                  width={90}
+                  height={90}
+                  alt="Company Icons"
+                  src={img}
+                  className="rounded-full sm:w-[50px] sm:h-[50px] w-[45px] h-[45px]"
+                />
+              </div>
+              <div className="text-[#070707] text-lg font-[600]">{company}</div>
+              <div>
+                <span className="text-[#070707] sm:text-[14px] text-[12px] flex font-normal justify-center items-center">
+                  Updated On: {updateDate}
+                  <span className="ml-1 cursor-pointer">
+                    <Image
+                      width={14}
+                      height={14}
+                      src="/assets/img/reload.png"
+                      className="w-[16px] h-[16px]"
+                      alt="Refresh Icon"
+                    />
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            {/* Card Content */}
+            <div className="flex justify-between p-2 px-4">
+              <div className="flex flex-col gap-[10px]">
+                <CardDetail label="Loan Amount" value={loanAmount} />
+                <CardDetail label="Application Date" value={applicationDate} />
+              </div>
+              <div className="flex flex-col gap-[10px]">
+                <CardDetail label="Loan Tenure" value={loanTenure} />
+                <CardDetail label="Rate Of Interest" value={rateOfInterest} />
+              </div>
+            </div>
+
+            {/* Card Bottom */}
+            <div className="flex justify-between p-2 items-center">
+              <Link
+                href={"/refer"}
+                className="text-[#00A6FF] font-medium text-[9px] sm:text-[12px]"
+              >
+                Refer Document
+              </Link>
+              <button className="flex justify-center items-center text-center bg-[linear-gradient(90deg,_#FFC87A_0%,_#FFFFFF_100%)] text-black px-4 py-1 rounded-full text-[10px] border border-[#F9A61A]">
+                Accept Journey Not Started
+                <svg
+                  className="ml-2 w-4 h-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export default AppCard;

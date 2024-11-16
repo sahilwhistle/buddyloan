@@ -48,7 +48,7 @@ const DropdownTwo: React.FC<CustomDropdownProps> = ({
           {options.map((option) => (
             <div
               key={option.value}
-              className="px-4 py-2 hover:bg-purple-50 cursor-pointer first:rounded-t-lg last:rounded-b-lg"
+              className="px-4 py-1 text-center text-sm text-black hover:bg-purple-50 cursor-pointer first:rounded-t-lg last:rounded-b-lg border-b-[0.2px]"
               onClick={() => handleSelect(option)}
             >
               {option.label}
