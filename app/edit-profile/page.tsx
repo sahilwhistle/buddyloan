@@ -51,7 +51,7 @@ const EditProfile = () => {
   };
   return (
     <div className="bg-white p-3 shadow-md">
-      <div className="mt-[80px] p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+      <div className="mt-[80px] p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
         <h3 className="font-poppins mt-2 text-2xl font-semibold leading-[30.88px] text-center text-[#253C82]">
           Edit Profile
         </h3>

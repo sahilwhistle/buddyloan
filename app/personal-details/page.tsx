@@ -94,11 +94,10 @@ const PersonalDetails = () => {
     <div className="bg-white h-full p-3 shadow-md">
       {/* Personal Detials Form */}
       <form onSubmit={handleSubmit}>
-        <div className="mt-[80px] p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+        <div className="mt-[80px] p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
           <h4 className="title text-lg font-semibold text-gray-400 flex justify-center items-center font-poppins">
             Personal details
           </h4>
-          method
           {/* Full Name */}
           <div className="mt-5 py-3">
             <Input
@@ -169,7 +168,7 @@ const PersonalDetails = () => {
         </div>
 
         {/* Pancard Details */}
-        <div className="p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+        <div className="p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
           <h4 className="title text-base font-semibold text-gray-400 flex justify-center items-center font-poppins">
             PAN Card details
           </h4>

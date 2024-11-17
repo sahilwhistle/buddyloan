@@ -81,13 +81,13 @@ const Registration = () => {
   };
 
   return (
-    <div className="bg-white p-3 shadow-md">
+    <div className="bg-white p-3">
       <h3 className="mt-[80px] font-poppins text-2xl font-semibold leading-[30.88px] text-center text-[#253C82]">
         Registration
       </h3>
 
       {/* Registration Form */}
-      <div className=" p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+      <div className=" p-4 mt-5 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
         <h4 className="title text-base font-medium text-gray-400 flex justify-center items-center font-poppins">
           Enter your details
         </h4>

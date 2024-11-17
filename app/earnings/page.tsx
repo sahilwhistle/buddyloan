@@ -49,7 +49,7 @@ const Earnings = () => {
         {/* Header Banner */}
         <BalanceCard
           labelOne="Total Earnings"
-          labelOneBalance={150}
+          labelOneBalance={1210}
           button="withdraw"
         />
         <div className="shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] bg-[#47B6F226] mt-[20px] py-1 rounded-[10px]">

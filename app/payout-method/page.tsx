@@ -28,7 +28,7 @@ const PaymentMethod: React.FC = () => {
         />
       </div>
 
-      <div className="w-full overflow-y-auto p-4 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+      <div className="w-full overflow-y-auto p-4 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
         <h4 className="title text-base font-medium text-gray-400 flex justify-center items-center font-poppins">
           {select === "upi" ? "Enter UPI details" : "Enter Account Details"}
         </h4>

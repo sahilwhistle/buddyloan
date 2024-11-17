@@ -20,7 +20,7 @@ const ProfessionDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen p-4 bg-white">
-      <div className="mt-[80px] w-full overflow-y-auto py-3 px-4 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+      <div className="mt-[80px] w-full overflow-y-auto py-3 px-4 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
         <h4 className="title text-lg font-semibold text-gray-400 flex justify-center items-center font-poppins">
           Profession details
         </h4>

@@ -117,7 +117,7 @@ const Transections = () => {
         <h4 className="py-2 mt-3 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
           Default Payout Mode
         </h4>
-        <div className="w-full overflow-y-auto p-2 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow">
+        <div className="w-full overflow-y-auto p-2 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
           {/* Payments Toggle Button */}
           <PaymentsToggle
             data={data}
