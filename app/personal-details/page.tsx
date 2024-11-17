@@ -186,10 +186,12 @@ const PersonalDetails = () => {
           {/* Date of Birth */}
           <div className="py-3">
             <CalendarInput
+              value=""
               label="Select Date"
               onDateChange={(date) => {
                 handleDateChange("dob", date);
               }}
+              error=""
             />
           </div>
 

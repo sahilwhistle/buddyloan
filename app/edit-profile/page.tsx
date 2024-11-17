@@ -96,10 +96,12 @@ const EditProfile = () => {
           {/* Date of Birth */}
           <div className="py-3">
             <CalendarInput
+              value=""
               label="Date of Birth"
               onDateChange={(date) => {
                 handleDateChange("dob", date);
               }}
+              error=""
             />
           </div>
 
