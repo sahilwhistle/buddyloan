@@ -4,58 +4,69 @@ import React from "react";
 import Input from "../components/forms/Input";
 import Dropdown from "../components/common/Dropdown";
 import CalendarInput from "../components/common/CalendarInput";
+import { useFormValidation, FieldName } from "../hooks/useFormValidation";
 
 const Registration = () => {
-  // State object to hold all form data
-  const [formData, setFormData] = useState({
-    fullName: "",
-    panNumber: "",
-    dob: "",
-    selectedOption: "",
-    pincode: "",
-    state: "",
-    city: "",
-    email: "",
-    otp: "",
-  });
+  // Specify only the fields you want to validate
+  const fields = [
+    "fullName",
+    "email",
+    "panNumber",
+    "pincode",
+    "dob",
+    "gender",
+    "otp",
+  ] as any;
 
-  const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
-  const [timer, setTimer] = useState(10); // 10-second timer
-  const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
-  const [submitted, setSubmitted] = useState(false); // Track form submission
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
 
-  // Handle form field change by updating only the specific field in formData
+  const [isOTPSent, setIsOTPSent] = useState(false);
+  const [timer, setTimer] = useState(10);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+
+  // Handle form field change
   const handleChange =
-    (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-        ...formData,
-        [field]: e.target.value,
-      });
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(field as any, e.target.value);
+      trigger(field as any);
     };
 
   // Callback to handle date change
-  const handleDateChange = (field: string, date: Date | null) => {
-    setFormData({
-      ...formData,
-      [field]: date,
-    });
+  const handleDateChange = (field: FieldName, date: Date | null) => {
+    setValue(field as any, date);
+    trigger(field as any);
+    console.log("date", date);
   };
 
-  const handleDropdownChange = (value: string) => {
-    setFormData({
-      ...formData,
-      selectedOption: value,
-    });
+  const handleDropdownChange = (field: FieldName, value: string) => {
+    setValue(field as any, value);
+    trigger(field as any);
   };
 
-  // Start countdown timer after OTP is sent
+  // Handle OTP sending
+  const handleSendOTP = async () => {
+    const isEmailValid = await trigger("email" as any);
+
+    if (isEmailValid) {
+      setIsOTPSent(true);
+      setTimer(15);
+      setIsTimerActive(true);
+    }
+  };
+
+  // Timer effect for OTP
   useEffect(() => {
     if (isTimerActive && timer > 0) {
       const intervalId = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
 
-      // Cleanup interval on unmount or when timer ends
       return () => clearInterval(intervalId);
     }
 
@@ -64,20 +75,13 @@ const Registration = () => {
     }
   }, [isTimerActive, timer]);
 
-  const handleSendOTP = () => {
-    // Reset the timer and start the countdown
-    setIsOTPSent(true);
-    setTimer(15); // reset timer to 15 seconds
-    setIsTimerActive(true);
-  };
-
-  // Handle form submission and log the collected data
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-
-    // Log the collected form data to the console
-    console.log("Form Submitted with the following data:", formData);
+  // Handle form submission
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Form submitted successfully:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
@@ -92,14 +96,15 @@ const Registration = () => {
           Enter your details
         </h4>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* Full Name */}
           <div className="mt-5 py-3">
             <Input
               type="text"
               placeholder="Full Name"
-              value={formData.fullName}
+              value={watch("fullName") || ""}
               onChange={handleChange("fullName")}
+              error={errors.fullName?.message}
             />
           </div>
 
@@ -108,8 +113,9 @@ const Registration = () => {
             <Input
               type="text"
               placeholder="PAN Number"
-              value={formData.panNumber}
+              value={watch("panNumber") || ""}
               onChange={handleChange("panNumber")}
+              error={errors.panNumber?.message}
             />
           </div>
 
@@ -117,24 +123,22 @@ const Registration = () => {
           <div className="py-3">
             <CalendarInput
               label="Select Date"
+              value={watch("dob") || null}
               onDateChange={(date) => {
                 handleDateChange("dob", date);
               }}
+              error={errors.dob?.message}
             />
           </div>
 
           {/* Dropdown for Tenure */}
           <div className="py-4">
             <Dropdown
-              label="Select Tenure"
-              options={["Option 1", "Option 2", "Option 3"]}
-              selected={formData.selectedOption}
-              onChange={handleDropdownChange}
-              error={
-                submitted && formData.selectedOption === ""
-                  ? "Please select a tenure"
-                  : undefined
-              }
+              label="Gender"
+              options={["Male", "Female"]}
+              selected={watch("gender") || ""}
+              onChange={(value) => handleDropdownChange("gender", value)}
+              error={errors.gender?.message}
             />
           </div>
 
@@ -143,24 +147,9 @@ const Registration = () => {
             <Input
               type="text"
               placeholder="Pincode"
-              value={formData.pincode}
+              value={watch("pincode") || ""}
               onChange={handleChange("pincode")}
-            />
-          </div>
-
-          {/* State and City */}
-          <div className="py-3 flex flex-row justify-between items-center gap-2.5">
-            <Input
-              type="text"
-              placeholder="State"
-              value={formData.state}
-              onChange={handleChange("state")}
-            />
-            <Input
-              type="text"
-              placeholder="City"
-              value={formData.city}
-              onChange={handleChange("city")}
+              error={errors.pincode?.message}
             />
           </div>
 
@@ -169,25 +158,28 @@ const Registration = () => {
             <Input
               type="email"
               placeholder="Email"
-              value={formData.email}
+              value={watch("email") || ""}
               onChange={handleChange("email")}
+              error={errors.email?.message}
             />
             <div className="flex flex-col items-end mt-1">
               {isTimerActive ? (
-                <>
-                  <div className="flex flex-col items-center mt-1">
-                    <span className="font-poppins text-xs font-medium text-b-blue mt-1 text-center">
-                      {timer}s
-                    </span>
-                    <span className="font-poppins text-xs font-medium text-gray-500">
-                      Re-send Email OTP
-                    </span>
-                  </div>
-                </>
+                <div className="flex flex-col items-center mt-1">
+                  <span className="font-poppins text-xs font-medium text-b-blue mt-1 text-center">
+                    {timer}s
+                  </span>
+                  <span className="font-poppins text-xs font-medium text-gray-500">
+                    Re-send Email OTP
+                  </span>
+                </div>
               ) : (
                 <span
                   onClick={handleSendOTP}
-                  className="font-poppins text-xs font-medium text-b-blue cursor-pointer"
+                  className={`font-poppins text-xs font-medium ${
+                    errors.email
+                      ? "text-gray-400 cursor-not-allowed"
+                      : "text-b-blue cursor-pointer"
+                  }`}
                 >
                   Send Email OTP
                 </span>
@@ -201,8 +193,9 @@ const Registration = () => {
               <Input
                 type="text"
                 placeholder="Email OTP"
-                value={formData.otp}
+                value={watch("otp") || ""}
                 onChange={handleChange("otp")}
+                error={errors.otp?.message}
               />
             </div>
           )}
@@ -211,9 +204,15 @@ const Registration = () => {
           <div className="py-3 flex justify-center">
             <button
               type="submit"
-              className="w-[200px] py-2 px-2 bg-b-blue text-white font-poppins text-lg font-semibold rounded-xl"
+              disabled={isSubmitting}
+              className={`w-[200px] py-2 px-2 bg-b-blue text-white font-poppins text-lg font-semibold rounded-xl
+                ${
+                  isSubmitting
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-opacity-90"
+                }`}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

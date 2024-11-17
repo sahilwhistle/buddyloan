@@ -6,7 +6,7 @@ interface DropdownProps {
   options: string[];
   selected: string | null;
   onChange: (value: string) => void;
-  error?: string;
+  error?: any;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({

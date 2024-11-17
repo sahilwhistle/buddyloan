@@ -4,12 +4,16 @@ interface CalendarInputProps {
   label?: string;
   selectedDate?: Date | null;
   onDateChange?: (date: Date | null) => void;
+  value: any;
+  error: any;
 }
 
 const CalendarInput: FC<CalendarInputProps> = ({
   label,
   selectedDate: initialSelectedDate = null,
   onDateChange,
+  error,
+  value,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     initialSelectedDate
@@ -172,6 +176,9 @@ const CalendarInput: FC<CalendarInputProps> = ({
           </div>
         </div>
       )}
+
+      {/* Error Message */}
+      {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );
 };

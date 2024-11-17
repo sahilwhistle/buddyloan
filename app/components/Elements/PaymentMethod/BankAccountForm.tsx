@@ -1,96 +1,96 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
-
-interface BankAccountFormData {
-  beneficiaryName: string;
-  accountNumber: string;
-  ifscNumber: string;
-  selectedOption: string;
-}
+import { useFormValidation, FieldName } from "@/app/hooks/useFormValidation"; // Use validation hook
 
 const BankAccountForm: React.FC = () => {
-  const [formData, setFormData] = useState<BankAccountFormData>({
-    beneficiaryName: "",
-    accountNumber: "",
-    ifscNumber: "",
-    selectedOption: "",
-  });
+  // Define fields for validation
+  const fields = ["fullName", "accountNumber", "ifscNumber", "tenure"] as any;
 
-  const [submitted, setSubmitted] = useState(false);
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
 
   const handleChange =
-    (field: keyof BankAccountFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [field]: value,
-      }));
+      setValue(field, value);
+      trigger(field); // Trigger validation on field change
     };
 
-  const handleDropdownChange = (value: string) => {
-    setFormData({
-      ...formData,
-      selectedOption: value,
-    });
+  const handleDropdownChange = (field: FieldName, value: string) => {
+    setValue(field, value);
+    trigger(field);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    console.log(
-      "Bank Account Form Submitted with the following data:",
-      formData
-    );
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Bank Account Form Submitted with the following data:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Beneficiary Name */}
       <div className="mt-5 py-3">
         <Input
           type="text"
           placeholder="Beneficiary Name"
-          value={formData.beneficiaryName}
-          onChange={handleChange("beneficiaryName")}
+          value={watch("fullName") || ""}
+          onChange={handleChange("fullName")}
+          error={errors.fullName?.message}
         />
       </div>
+
+      {/* Dropdown for Tenure */}
       <div className="py-2">
         <Dropdown
           label="Select Tenure"
           options={["Option 1", "Option 2", "Option 3"]}
-          selected={formData.selectedOption}
-          onChange={handleDropdownChange}
-          error={
-            submitted && formData.selectedOption === ""
-              ? "Please select a tenure"
-              : undefined
-          }
+          selected={watch("tenure") || ""}
+          onChange={(value) => handleDropdownChange("tenure", value)}
+          error={errors.tenure?.message}
         />
       </div>
+
+      {/* Account Number */}
       <div className="mt-5 py-3">
         <Input
           type="text"
           placeholder="Account Number"
-          value={formData.accountNumber}
+          value={watch("accountNumber") || ""}
           onChange={handleChange("accountNumber")}
+          error={errors.accountNumber?.message}
         />
       </div>
+
+      {/* IFSC Number */}
       <div className="py-3">
         <Input
           type="text"
           placeholder="IFSC Number"
-          value={formData.ifscNumber}
+          value={watch("ifscNumber") || ""}
           onChange={handleChange("ifscNumber")}
+          error={errors.ifscNumber?.message}
         />
       </div>
+
+      {/* Submit Button */}
       <div className="py-3 flex justify-center">
         <button
           type="submit"
-          className="w-[200px] py-[16px] px-4 bg-b-blue text-white font-poppins text-sm font-semibold rounded-[18px]"
+          disabled={isSubmitting}
+          className={`w-[200px] py-[16px] px-4 bg-b-blue text-white font-poppins text-sm font-semibold rounded-[18px]
+            ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          Add Payout Method
+          {isSubmitting ? "Submitting..." : "Add Payout Method"}
         </button>
       </div>
     </form>
