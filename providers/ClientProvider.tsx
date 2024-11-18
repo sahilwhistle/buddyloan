@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import Header from "@/app/components/common/Header";
+import Header from "@/components/common/Header";
 
 const ClientProvider = ({ children }: { children: React.ReactNode }) => {
   const [hideNavbar, sethideNavbar] = useState(false);

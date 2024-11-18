@@ -1,6 +1,6 @@
 import React from "react";
-import LoanStatusChart from "../components/common/LoanStatusChart";
-import FeaturesCard from "../components/common/FeaturesCard";
+import LoanStatusChart from "../../components/common/LoanStatusChart";
+import FeaturesCard from "../../components/common/FeaturesCard";
 
 const Dashboard = () => {
   const loanSeries = [50, 25, 13, 12];

@@ -35,7 +35,7 @@ const DropdownTwo: React.FC<CustomDropdownProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`min-w-[120px] text-xs ${
+        className={`min-w-[100px] text-xs ${
           size ? "px-[18px]" : "px-6"
         } py-1 flex items-center justify-between text-white rounded-full bg-gradient-to-r from-[#6F89D6] to-[#243B81] text-white rounded-[30px] transition-all duration-200`}
       >
@@ -54,7 +54,9 @@ const DropdownTwo: React.FC<CustomDropdownProps> = ({
           {options.map((option) => (
             <div
               key={option.value}
-              className="px-4 py-1 text-center text-sm text-black hover:bg-purple-50 cursor-pointer first:rounded-t-lg last:rounded-b-lg border-b-[0.2px]"
+              className={`${
+                size ? "text-[12px]" : "text-sm"
+              } pe-2 px-4 py-1 text-center text-black hover:bg-purple-50 cursor-pointer first:rounded-t-lg last:rounded-b-lg border-b-[0.2px]`}
               onClick={() => handleSelect(option)}
             >
               {option.label}

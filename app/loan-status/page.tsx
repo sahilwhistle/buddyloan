@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { applicationData, offersData } from "../mock/application";
-import AppCard from "../components/common/AppCard";
-import Offers from "../components/common/Offers";
-import DropdownTwo from "../components/common/DropwdownTwo";
+import { applicationData, offersData } from "../../mock/application";
+import AppCard from "../../components/common/AppCard";
+import Offers from "../../components/common/Offers";
+import DropdownTwo from "../../components/common/DropwdownTwo";
 
 const LoanStatus = () => {
   const timeOptions = [
