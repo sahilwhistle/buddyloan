@@ -1,4 +1,3 @@
-// hooks/useFormValidation.ts
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -120,7 +119,8 @@ const fieldSchemas = {
     .regex(
       /^[a-zA-Z0-9]+$/,
       "Registration ID should only contain alphanumeric characters"
-    ),
+    )
+    .optional(), // Made optional
 
   annualTurnover: z
     .string()
@@ -133,7 +133,7 @@ const fieldSchemas = {
       /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$/,
       "Invalid GST number format"
     )
-    .min(1, "GST number is required"),
+    .optional(), // Made optional
 
   hasBusinessProof: z.string().optional(),
 
@@ -151,14 +151,34 @@ const fieldSchemas = {
   companyType: z.string().min(1, "Please select a your company type"),
 };
 
-// Create dynamic schema based on required fields
-export const createSchema = (fields: (keyof typeof fieldSchemas)[]) => {
+// Create dynamic schema based on required fields and form state
+export const createSchema = (
+  fields: (keyof typeof fieldSchemas)[],
+  formData?: any
+) => {
   const schemaObject: { [key: string]: any } = {};
 
-  // Only add fields to the schema if they are used in the form
   fields.forEach((field) => {
     if (fieldSchemas[field]) {
-      schemaObject[field] = fieldSchemas[field];
+      if (field === "registrationId") {
+        schemaObject[field] =
+          formData?.hasBusinessProof === "yes"
+            ? z
+                .string()
+                .min(1, "Registration ID is required")
+                .and(fieldSchemas[field])
+            : z.string().optional();
+      } else if (field === "gstNumber") {
+        schemaObject[field] =
+          formData?.hasGst === "yes"
+            ? z
+                .string()
+                .min(1, "GST number is required")
+                .and(fieldSchemas[field])
+            : z.string().optional();
+      } else {
+        schemaObject[field] = fieldSchemas[field];
+      }
     }
   });
 
@@ -170,10 +190,11 @@ export type FieldName = keyof typeof fieldSchemas;
 export const useFormValidation = <T extends FieldName[]>(fields: T) => {
   type FormData = z.infer<ReturnType<typeof createSchema>>;
 
-  const schema = createSchema(fields);
-
   const form = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: (values, context, options) => {
+      const schema = createSchema(fields, values);
+      return zodResolver(schema)(values, context, options);
+    },
     mode: "onChange",
   });
 

@@ -22,6 +22,7 @@ const SelfEmployedDetails = () => {
     setValue,
     watch,
     trigger,
+    clearErrors,
   } = useFormValidation(fields);
 
   const formData = watch();
@@ -37,14 +38,44 @@ const SelfEmployedDetails = () => {
     trigger(field);
   };
 
+  // const handleRadioChange = (field: FieldName, value: string) => {
+  //   setValue(field, value);
+  //   trigger(field);
+  // };
+
   const handleRadioChange = (field: FieldName, value: string) => {
     setValue(field, value);
+
+    // Clear errors for conditional fields when radio selection changes
+    if (field === "hasBusinessProof" && value === "no") {
+      clearErrors("registrationId");
+      console.log("hasBusinessProof no");
+
+      delete formData.registrationId;
+    }
+    if (field === "hasGst" && value === "no") {
+      clearErrors("gstNumber");
+      delete formData.gstNumber;
+    }
+
     trigger(field);
   };
 
   // Handle form submission
   const onSubmit = async (data: any) => {
     try {
+      // Remove unused fields based on radio selections
+      if (data.hasBusinessProof === "no") {
+        console.log("hasBusinessProof no++++++=");
+
+        delete data.registrationId;
+      }
+      if (data.hasGst === "no") {
+        console.log("hasGst no++++++=");
+
+        delete data.gstNumber;
+      }
+
       console.log("Form submitted successfully:", data);
     } catch (error) {
       console.error("Form submission error:", error);
