@@ -56,18 +56,18 @@ const AppCard: React.FC<AppCardProps> = ({ data }) => {
                 />
               </div>
               <div className="text-[#070707] text-lg font-[600]">{company}</div>
-              <div>
-                <span className="text-[#070707] sm:text-[14px] text-[12px] flex font-normal justify-center items-center">
+              <div className="flex justify-center items-center">
+                <span className="text-[#070707] sm:text-[14px] text-[12px] font-normal flex justify-center items-center">
                   Updated On: {updateDate}
-                  <span className="ml-1 cursor-pointer">
-                    <Image
-                      width={14}
-                      height={14}
-                      src="/assets/img/reload.png"
-                      className="w-[16px] h-[16px]"
-                      alt="Refresh Icon"
-                    />
-                  </span>
+                </span>
+                <span className="ml-2 mt-[-2px] cursor-pointer">
+                  <Image
+                    width={14}
+                    height={14}
+                    src="/assets/img/reload.png"
+                    className="w-[16px] h-[16px]"
+                    alt="Refresh Icon"
+                  />
                 </span>
               </div>
             </div>
