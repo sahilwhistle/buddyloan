@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 
 const Confirmation: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-72 p-6 bg-white rounded-xl shadow-lg text-center relative">
         <Image
-            src={"/confirm.png" } 
-            alt="Logo"
-            width={200}       
-            height={200}     
+          src={"/assets/img/confirm.png"}
+          alt="Logo"
+          width={200}
+          height={200}
         />
 
         {/* Title and Subtitle */}
