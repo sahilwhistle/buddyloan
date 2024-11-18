@@ -131,7 +131,7 @@ const Registration = () => {
             />
           </div>
 
-          {/* Dropdown for Tenure */}
+          {/* Dropdown for Gender */}
           <div className="py-4">
             <Dropdown
               label="Gender"

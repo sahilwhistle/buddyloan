@@ -79,10 +79,19 @@ const fieldSchemas = {
     .length(11, "IFSC code must be exactly 11 characters") // IFSC codes are typically 11 characters long
     .regex(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Invalid IFSC code format"),
 
+  // Terms & Conditions
+  terms: z.literal(true, {
+    errorMap: () => ({
+      message: "You must accept the terms and conditions",
+    }),
+  }),
+
   // Dropdown Fields
   gender: z.string().min(1, "Please select a gender"),
 
   tenure: z.string().min(1, "Please select a tenure option"),
+
+  marritalSatus: z.string().min(1, "Please select a marrital status option"),
 };
 
 // Create dynamic schema based on required fields

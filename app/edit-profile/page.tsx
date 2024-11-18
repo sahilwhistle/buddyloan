@@ -3,51 +3,46 @@ import React, { useState } from "react";
 import Input from "../components/forms/Input";
 import CalendarInput from "../components/common/CalendarInput";
 import Dropdown from "../components/common/Dropdown";
+import { FieldName, useFormValidation } from "../hooks/useFormValidation";
 
 const EditProfile = () => {
-  // State object to hold all form data
-  const [formData, setFormData] = useState({
-    fullName: "",
-    panNumber: "",
-    dob: "",
-    selectedOption: "",
-    pincode: "",
-    state: "",
-    city: "",
-    email: "",
-    otp: "",
-  });
+  // Specify only the fields you want to validate
+  const fields = ["fullName", "email", "panNumber", "dob", "gender"] as any;
 
-  // Handle form field change by updating only the specific field in formData
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
+
+  // Handle form field change
   const handleChange =
-    (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-        ...formData,
-        [field]: e.target.value,
-      });
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(field as any, e.target.value);
+      trigger(field as any);
     };
 
   // Callback to handle date change
-  const handleDateChange = (field: string, date: Date | null) => {
-    setFormData({
-      ...formData,
-      [field]: date,
-    });
+  const handleDateChange = (field: FieldName, date: Date | null) => {
+    setValue(field as any, date);
+    trigger(field as any);
+    console.log("date", date);
   };
 
-  const handleDropdownChange = (value: string) => {
-    setFormData({
-      ...formData,
-      selectedOption: value,
-    });
+  const handleDropdownChange = (field: FieldName, value: string) => {
+    setValue(field as any, value);
+    trigger(field as any);
   };
 
-  // Handle form submission and log the collected data
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Log the collected form data to the console
-    console.log("Form Submitted with the following data:", formData);
+  // Handle form submission
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Form submitted successfully:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
   return (
     <div className="bg-white p-3 shadow-md">
@@ -72,14 +67,15 @@ const EditProfile = () => {
         </div>
 
         {/* Edit Profile Form */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* Full Name */}
           <div className="mt-5 py-3">
             <Input
               type="text"
               placeholder="Full Name"
-              value={formData.fullName}
+              value={watch("fullName") || ""}
               onChange={handleChange("fullName")}
+              error={errors.fullName?.message}
             />
           </div>
 
@@ -88,20 +84,21 @@ const EditProfile = () => {
             <Input
               type="text"
               placeholder="PAN Number"
-              value={formData.panNumber}
+              value={watch("panNumber") || ""}
               onChange={handleChange("panNumber")}
+              error={errors.panNumber?.message}
             />
           </div>
 
           {/* Date of Birth */}
           <div className="py-3">
             <CalendarInput
-              value=""
-              label="Date of Birth"
+              label="Select Date"
+              value={watch("dob") || null}
               onDateChange={(date) => {
                 handleDateChange("dob", date);
               }}
-              error=""
+              error={errors.dob?.message}
             />
           </div>
 
@@ -110,18 +107,20 @@ const EditProfile = () => {
             <Dropdown
               label="Gender"
               options={["Male", "Female"]}
-              selected={formData.selectedOption}
-              onChange={handleDropdownChange}
+              selected={watch("gender") || ""}
+              onChange={(value) => handleDropdownChange("gender", value)}
+              error={errors.gender?.message}
             />
           </div>
 
           {/* Email */}
           <div className="py-3 mt-3">
             <Input
-              type="text"
+              type="email"
               placeholder="Email"
-              value={formData.pincode}
+              value={watch("email") || ""}
               onChange={handleChange("email")}
+              error={errors.email?.message}
             />
           </div>
 
