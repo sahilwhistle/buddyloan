@@ -42,7 +42,7 @@ const PersonalDetails = () => {
       trigger(field as any);
     };
 
-  // Handle form chjeckbox field change by updating only the specific field in formData
+  // Handle form checkbox field change by updating only the specific field in formData
   const handleCheck =
     (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(field as any, e.target.value);
@@ -241,9 +241,17 @@ const PersonalDetails = () => {
               />
               <div className="flex flex-col items-end mt-1">
                 {isTimerActive ? (
-                  <span className="font-poppins text-xs font-medium text-b-blue">
-                    {timer}s
-                  </span>
+                  <div className="flex flex-col text-center">
+                    <span className="font-poppins text-xs font-semibold text-b-blue">
+                      {timer}s
+                    </span>
+                    <span
+                      className="text-xs text-gray-400"
+                      onClick={handleSendOTP}
+                    >
+                      Resend OTP
+                    </span>
+                  </div>
                 ) : (
                   <span
                     onClick={handleSendOTP}
