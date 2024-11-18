@@ -65,6 +65,8 @@ const SalariedDetails = () => {
         confirmText="Ok"
         onConfirm={handleConfirm}
       />
+
+      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Company Name */}
         <div className="mt-5 py-3">

@@ -92,6 +92,8 @@ const SelfEmployedDetails = () => {
         confirmText="Ok"
         onConfirm={handleConfirm}
       />
+
+      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Company Type */}
         <div className="py-2">

@@ -9,10 +9,6 @@ const ProfessionDetails: React.FC = () => {
 
   const handleSelectionChange = (value: string) => setSelect(value);
 
-  const handleFormSubmit = (formData: any) => {
-    console.log("Form", formData);
-  };
-
   const options = [
     { label: "Salaried", value: "salaried" },
     { label: "Self Employed", value: "self-employed" },
