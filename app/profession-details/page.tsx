@@ -32,7 +32,7 @@ const ProfessionDetails: React.FC = () => {
           />
         </div>
         {select === "salaried" ? (
-          <SalariedDetails onSubmit={handleFormSubmit} />
+          <SalariedDetails />
         ) : (
           <SelfEmployedDetails onSubmit={handleFormSubmit} />
         )}

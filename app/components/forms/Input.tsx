@@ -29,6 +29,8 @@ const Input: React.FC<InputProps> = ({
       <label className="absolute top-0 left-3 px-1 text-[#47B6F2] bg-white transform -translate-y-1/2 pointer-events-none">
         {placeholder}
       </label>
+
+      {/* Error */}
       {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );

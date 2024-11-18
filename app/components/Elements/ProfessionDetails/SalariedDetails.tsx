@@ -2,105 +2,119 @@
 import React, { useState } from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
+import { FieldName, useFormValidation } from "@/app/hooks/useFormValidation";
 
-interface SalariedDetailsProps {
-  onSubmit: (data: SalariedFormData) => void;
-}
+const SalariedDetails = () => {
+  // Specify only the fields you want to validate
+  const fields = [
+    "companyName",
+    "email",
+    "monthlyIncome",
+    "address",
+    "pincode",
+    "experience",
+  ] as any;
 
-interface SalariedFormData {
-  companyName: string;
-  officeEmail: string;
-  monthlyIncome: string;
-  companyAddress: string;
-  companyPinCode: string;
-  experience: string;
-}
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
 
-const SalariedDetails: React.FC<SalariedDetailsProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<SalariedFormData>({
-    companyName: "",
-    officeEmail: "",
-    monthlyIncome: "",
-    companyAddress: "",
-    companyPinCode: "",
-    experience: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
+  // Handle form field change
   const handleChange =
-    (field: keyof SalariedFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((prevData) => ({ ...prevData, [field]: e.target.value }));
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(field as any, e.target.value);
+      trigger(field as any);
     };
 
-  const handleDropdownChange = (
-    field: keyof SalariedFormData,
-    value: string
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: value }));
+  const handleDropdownChange = (field: FieldName, value: string) => {
+    setValue(field as any, value);
+    trigger(field as any);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    onSubmit(formData);
+  // Handle form submission
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Form submitted successfully:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Company Name */}
       <div className="mt-5 py-3">
         <Input
           type="text"
           placeholder="Company Name"
-          value={formData.companyName}
+          value={watch("companyName") || ""}
           onChange={handleChange("companyName")}
+          error={errors.companyName?.message}
         />
       </div>
+
+      {/* Office Email ID */}
       <div className="py-3">
         <Input
           type="text"
           placeholder="Office Email Id"
-          value={formData.officeEmail}
-          onChange={handleChange("officeEmail")}
+          value={watch("email") || ""}
+          onChange={handleChange("email")}
+          error={errors.email?.message}
         />
       </div>
+
+      {/* Monthly Income */}
       <div className="py-3">
         <Input
           type="text"
           placeholder="Monthly Income"
-          value={formData.monthlyIncome}
+          value={watch("monthlyIncome") || ""}
           onChange={handleChange("monthlyIncome")}
+          error={errors.monthlyIncome?.message}
         />
       </div>
+
+      {/* Adress */}
       <div className="py-3">
         <Input
           type="text"
           placeholder="Company Address"
-          value={formData.companyAddress}
-          onChange={handleChange("companyAddress")}
+          value={watch("address") || ""}
+          onChange={handleChange("address")}
+          error={errors.address?.message}
         />
       </div>
+
+      {/* Pincode */}
       <div className="py-3">
         <Input
           type="text"
           placeholder="Company PIN Code"
-          value={formData.companyPinCode}
-          onChange={handleChange("companyPinCode")}
+          value={watch("pincode") || ""}
+          onChange={handleChange("pincode")}
+          error={errors.pincode?.message}
         />
       </div>
+
       <div className="py-2">
-        <Dropdown
-          label="Total work experience"
-          options={["<2 years", "2-5 years", ">5 years"]}
-          selected={formData.experience}
-          onChange={(value: any) => handleDropdownChange("experience", value)}
-          error={
-            submitted && !formData.experience
-              ? "Please select an option"
-              : undefined
-          }
-        />
+        {/* Dropdown for Experience */}
+        <div className="py-4">
+          <Dropdown
+            label="Total work experience"
+            options={["<2 years", "2-5 years", ">5 years"]}
+            selected={watch("experience") || ""}
+            onChange={(value) => handleDropdownChange("experience", value)}
+            error={errors.experience?.message}
+          />
+        </div>
       </div>
+
+      {/* Submit */}
       <div className="mt-[20px] py-3 flex justify-center">
         <button
           type="submit"

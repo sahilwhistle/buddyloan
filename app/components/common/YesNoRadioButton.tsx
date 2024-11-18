@@ -9,6 +9,7 @@ interface YesNoRadioProps {
   disabled?: boolean;
   required?: boolean;
   extraLabel?: string;
+  error: any;
 }
 
 const YesNoRadioButton: React.FC<YesNoRadioProps> = ({
@@ -19,6 +20,7 @@ const YesNoRadioButton: React.FC<YesNoRadioProps> = ({
   disabled = false,
   required = false,
   extraLabel,
+  error,
 }) => {
   const id = useId();
 
@@ -82,6 +84,9 @@ const YesNoRadioButton: React.FC<YesNoRadioProps> = ({
           </label>
         </div>
       </div>
+
+      {/* Error */}
+      {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );
 };

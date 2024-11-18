@@ -3,63 +3,57 @@ import React, { useState } from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
 import YesNoRadioButton from "../../common/YesNoRadioButton";
+import { useFormValidation, FieldName } from "@/app/hooks/useFormValidation";
 
-interface SelfEmployedDetailsProps {
-  onSubmit: (data: SelfEmployedFormData) => void;
-}
+const SelfEmployedDetails = () => {
+  const fields = [
+    "companyType",
+    "hasBusinessProof",
+    "registrationId",
+    "annualTurnover",
+    "experience",
+    "hasGst",
+    "gstNumber",
+  ] as any;
 
-interface SelfEmployedFormData {
-  companyType: string;
-  hasBusinessProof: string;
-  hasGst: string;
-  registrationId?: any;
-  annualTurnover?: any;
-  businessExperience: string;
-  gstNumber?: any;
-}
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
 
-const SelfEmployedDetails: React.FC<SelfEmployedDetailsProps> = ({
-  onSubmit,
-}) => {
-  const [formData, setFormData] = useState<SelfEmployedFormData>({
-    companyType: "",
-    hasBusinessProof: "",
-    hasGst: "",
-    registrationId: "",
-    annualTurnover: "",
-    businessExperience: "",
-    gstNumber: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const formData = watch();
 
   const handleChange =
-    (field: keyof SelfEmployedFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((prevData) => ({ ...prevData, [field]: e.target.value }));
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(field, e.target.value);
+      trigger(field);
     };
 
-  const handleDropdownChange = (
-    field: keyof SelfEmployedFormData,
-    value: string
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: value }));
+  const handleDropdownChange = (field: FieldName, value: string) => {
+    setValue(field, value);
+    trigger(field);
   };
 
-  const handleRadioChange = (
-    field: keyof SelfEmployedFormData,
-    value: string
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: value }));
+  const handleRadioChange = (field: FieldName, value: string) => {
+    setValue(field, value);
+    trigger(field);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    onSubmit(formData);
+  // Handle form submission
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Form submitted successfully:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Company Type */}
       <div className="py-2">
         <Dropdown
           label="Company Type"
@@ -69,15 +63,13 @@ const SelfEmployedDetails: React.FC<SelfEmployedDetailsProps> = ({
             "Pvt. Ltd",
             "Freelancer",
           ]}
-          selected={formData.companyType}
+          selected={watch("companyType") || ""}
           onChange={(value) => handleDropdownChange("companyType", value)}
-          error={
-            submitted && !formData.companyType
-              ? "Please select an option"
-              : undefined
-          }
+          error={errors.companyType?.message}
         />
       </div>
+
+      {/* Business Proof */}
       <div className="py-2 text-center">
         <span className="text-[#A8A7A7]">
           Do you have business registration proof?
@@ -85,29 +77,33 @@ const SelfEmployedDetails: React.FC<SelfEmployedDetailsProps> = ({
         <div className="mt-3">
           <YesNoRadioButton
             name="proof"
-            value={formData.hasBusinessProof}
-            onChange={(value: any) =>
-              handleRadioChange("hasBusinessProof", value)
-            }
+            value={watch("hasBusinessProof") || ""}
+            onChange={(value) => handleRadioChange("hasBusinessProof", value)}
+            error={errors.hasBusinessProof?.message}
           />
         </div>
       </div>
+
       {formData.hasBusinessProof === "yes" && (
         <>
+          {/* Registration ID */}
           <div className="mt-5 py-3">
             <Input
               type="text"
               placeholder="Registration ID"
-              value={formData.registrationId}
+              value={watch("registrationId") || ""}
               onChange={handleChange("registrationId")}
+              error={errors.registrationId?.message}
             />
           </div>
+          {/* Annual Turnover */}
           <div className="py-3">
             <Input
               type="text"
               placeholder="Annual Turnover"
-              value={formData.annualTurnover}
+              value={watch("annualTurnover") || ""}
               onChange={handleChange("annualTurnover")}
+              error={errors.annualTurnover?.message}
             />
           </div>
         </>
@@ -118,49 +114,53 @@ const SelfEmployedDetails: React.FC<SelfEmployedDetailsProps> = ({
           <Input
             type="text"
             placeholder="Annual Turnover"
-            value={formData.annualTurnover}
+            value={watch("annualTurnover") || ""}
             onChange={handleChange("annualTurnover")}
+            error={errors.annualTurnover?.message}
           />
         </div>
       )}
 
+      {/* Dropdown for Business Experience */}
       <div className="py-2">
         <Dropdown
           label="How old is your business?"
           options={["<2 years", "2-5 years", ">5 years"]}
-          selected={formData.businessExperience}
-          onChange={(value) =>
-            handleDropdownChange("businessExperience", value)
-          }
-          error={
-            submitted && !formData.businessExperience
-              ? "Please select an option"
-              : undefined
-          }
+          selected={watch("experience") || ""}
+          onChange={(value) => handleDropdownChange("experience", value)}
+          error={errors.experience?.message}
         />
       </div>
+
+      {/* GST */}
       <div className="py-2">
         <YesNoRadioButton
-          value={formData.hasGst}
           name="gst"
           extraLabel="GST Available:"
+          value={watch("hasGst") || ""}
           onChange={(value) => handleRadioChange("hasGst", value)}
+          error={errors.hasGst?.message}
         />
       </div>
+
       {formData.hasGst === "yes" && (
         <div className="mt-5 py-3">
           <Input
             type="text"
             placeholder="GST Number"
-            value={formData.gstNumber}
+            value={watch("gstNumber") || ""}
             onChange={handleChange("gstNumber")}
+            error={errors.gstNumber?.message}
           />
         </div>
       )}
+
+      {/* Submit Button */}
       <div className="mt-[20px] py-3 flex justify-center">
         <button
           type="submit"
           className="w-[200px] py-[12px] px-4 bg-b-blue text-white font-poppins text-lg font-semibold rounded-[18px]"
+          disabled={isSubmitting}
         >
           Submit
         </button>

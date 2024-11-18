@@ -59,6 +59,33 @@ const fieldSchemas = {
 
   email: z.string().email("Invalid email address").min(5, "Email is required"),
 
+  companyName: z
+    .string()
+    .min(2, "First name must be at least 2 characters")
+    .max(50, "First name must not exceed 50 characters")
+    .regex(
+      /^[a-zA-Z\s]*$/,
+      "First name should only contain letters and spaces"
+    ),
+
+  monthlyIncome: z
+    .string()
+    .regex(/^\d+$/, "Monthly income must be a valid numeric value")
+    .min(1, "Monthly income is required")
+    .refine(
+      (value) => parseInt(value) > 0 && parseInt(value) <= 10000000,
+      "Monthly income must be greater than 0 and less than or equal to 10,000,000"
+    ),
+
+  address: z
+    .string()
+    .min(5, "Address must be at least 5 characters long")
+    .max(100, "Address must not exceed 100 characters")
+    .regex(
+      /^[a-zA-Z0-9\s,.'-]+$/,
+      "Address should contain only letters, numbers, spaces, and common punctuation (,.'-)"
+    ),
+
   otp: z
     .string()
     .length(6, "OTP must be 6 digits")
@@ -86,12 +113,42 @@ const fieldSchemas = {
     }),
   }),
 
+  registrationId: z
+    .string()
+    .min(5, "Registration ID must be at least 5 characters long")
+    .max(20, "Registration ID must not exceed 20 characters")
+    .regex(
+      /^[a-zA-Z0-9]+$/,
+      "Registration ID should only contain alphanumeric characters"
+    ),
+
+  annualTurnover: z
+    .string()
+    .regex(/^\d+$/, "Annual turnover must be a valid numeric value")
+    .min(1, "Annual turnover is required"),
+
+  gstNumber: z
+    .string()
+    .regex(
+      /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$/,
+      "Invalid GST number format"
+    )
+    .min(1, "GST number is required"),
+
+  hasBusinessProof: z.string().optional(),
+
+  hasGst: z.string().optional(),
+
   // Dropdown Fields
   gender: z.string().min(1, "Please select a gender"),
 
   tenure: z.string().min(1, "Please select a tenure option"),
 
   marritalSatus: z.string().min(1, "Please select a marrital status option"),
+
+  experience: z.string().min(1, "Please select a your experience"),
+
+  companyType: z.string().min(1, "Please select a your company type"),
 };
 
 // Create dynamic schema based on required fields
