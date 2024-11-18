@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import DropdownTwo from "../components/common/DropwdownTwo";
-import UserCard from "../components/common/userCard";
-import usersdata from "../mock/userlistdata";
+import DropdownTwo from "../../components/common/DropwdownTwo";
+import UserCard from "../../components/common/userCard";
+import usersdata from "../../mock/userlistdata";
 
 const UsersList = () => {
   const timeOptions = [

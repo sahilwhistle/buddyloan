@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Input from "../components/forms/Input";
-import PaymentsToggle from "../components/common/PaymentsToogle";
-import Table from "../components/common/Table";
-import BalanceCard from "../components/common/BalenceCard";
+import Input from "../../components/forms/Input";
+import PaymentsToggle from "../../components/common/PaymentsToogle";
+import Table from "../../components/common/Table";
+import BalanceCard from "../../components/common/BalenceCard";
 
 const Transections = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent

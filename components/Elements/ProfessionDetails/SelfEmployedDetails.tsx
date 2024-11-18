@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
 import YesNoRadioButton from "../../common/YesNoRadioButton";
-import { useFormValidation, FieldName } from "@/app/hooks/useFormValidation";
+import { useFormValidation, FieldName } from "@/hooks/useFormValidation";
 
 const SelfEmployedDetails = () => {
   const fields = [

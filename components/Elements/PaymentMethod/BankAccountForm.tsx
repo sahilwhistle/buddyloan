@@ -2,7 +2,7 @@
 import React from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
-import { useFormValidation, FieldName } from "@/app/hooks/useFormValidation"; // Use validation hook
+import { useFormValidation, FieldName } from "@/hooks/useFormValidation"; // Use validation hook
 
 const BankAccountForm: React.FC = () => {
   // Define fields for validation

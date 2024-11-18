@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Input from "../../forms/Input";
-import { useFormValidation, FieldName } from "@/app/hooks/useFormValidation";
+import { useFormValidation, FieldName } from "@/hooks/useFormValidation";
 
 const UPIForm: React.FC = () => {
   // Specify only the fields you want to validate

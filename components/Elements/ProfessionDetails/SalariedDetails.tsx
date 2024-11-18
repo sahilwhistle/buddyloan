@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Input from "../../forms/Input";
 import Dropdown from "../../common/Dropdown";
-import { FieldName, useFormValidation } from "@/app/hooks/useFormValidation";
+import { FieldName, useFormValidation } from "@/hooks/useFormValidation";
 
 const SalariedDetails = () => {
   // Specify only the fields you want to validate

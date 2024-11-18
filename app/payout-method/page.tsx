@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import ToggleButtonGroup from "../components/common/ToggleButton";
-import UPIForm from "../components/Elements/PaymentMethod/UPIForm";
-import BankAccountForm from "../components/Elements/PaymentMethod/BankAccountForm";
+import ToggleButtonGroup from "../../components/common/ToggleButton";
+import UPIForm from "../../components/Elements/PaymentMethod/UPIForm";
+import BankAccountForm from "../../components/Elements/PaymentMethod/BankAccountForm";
 
 const PaymentMethod: React.FC = () => {
   const [select, setSelect] = useState("upi");

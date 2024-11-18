@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import React from "react";
-import Input from "../components/forms/Input";
-import Dropdown from "../components/common/Dropdown";
-import { FieldName, useFormValidation } from "../hooks/useFormValidation";
-import CalendarInput from "../components/common/CalendarInput";
+import Input from "../../components/forms/Input";
+import Dropdown from "../../components/common/Dropdown";
+import { FieldName, useFormValidation } from "../../hooks/useFormValidation";
+import CalendarInput from "../../components/common/CalendarInput";
 
 const PersonalDetails = () => {
   // Specify only the fields you want to validate

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import ToggleButtonGroup from "../components/common/ToggleButton";
-import SalariedDetails from "../components/Elements/ProfessionDetails/SalariedDetails";
-import SelfEmployedDetails from "../components/Elements/ProfessionDetails/SelfEmployedDetails";
+import ToggleButtonGroup from "../../components/common/ToggleButton";
+import SalariedDetails from "../../components/Elements/ProfessionDetails/SalariedDetails";
+import SelfEmployedDetails from "../../components/Elements/ProfessionDetails/SelfEmployedDetails";
 
 const ProfessionDetails: React.FC = () => {
   const [select, setSelect] = useState("salaried");
@@ -31,11 +31,7 @@ const ProfessionDetails: React.FC = () => {
             setSelectedValue={handleSelectionChange}
           />
         </div>
-        {select === "salaried" ? (
-          <SalariedDetails />
-        ) : (
-          <SelfEmployedDetails onSubmit={handleFormSubmit} />
-        )}
+        {select === "salaried" ? <SalariedDetails /> : <SelfEmployedDetails />}
       </div>
     </div>
   );

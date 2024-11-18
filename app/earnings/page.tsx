@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Table from "../components/common/Table";
-import BalanceCard from "../components/common/BalenceCard";
-import tableData from "../mock/earnings";
-import DropdownTwo from "../components/common/DropwdownTwo";
+import Table from "../../components/common/Table";
+import BalanceCard from "../../components/common/BalenceCard";
+import tableData from "../../mock/earnings";
+import DropdownTwo from "../../components/common/DropwdownTwo";
 
 const Earnings = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
