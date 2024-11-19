@@ -108,10 +108,11 @@ const CalendarInput: FC<CalendarInputProps> = ({
 
       <div
         className={`flex items-center w-full p-3 mt-2 border rounded-[12px] focus:outline-none border-b-blue`}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-gray-700">{formatDate(selectedDate)}</span>
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          type="button"
           className="ml-auto flex items-center justify-center"
         >
           <img

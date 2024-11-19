@@ -40,7 +40,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         {/* Display the selected value if there is one */}
         <span className="flex-grow text-[#47B6F2] poppins">{selected}</span>
 
-        <button className="ml-auto flex items-center justify-center w-7 h-7 bg-[#47B6F2] text-white rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-[#47B6F2]">
+        <button
+          type="button"
+          className="ml-auto flex items-center justify-center w-7 h-7 bg-[#47B6F2] text-white rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-[#47B6F2]"
+        >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
