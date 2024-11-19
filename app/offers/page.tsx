@@ -16,9 +16,9 @@ const Offers = () => {
     console.log("Selected time period:", option);
   };
   return (
-    <div className="min-h-screen p-4 bg-white overflow-auto">
-      <div className="max-w-sm mx-auto">
-        <div className="mt-[80px] flex justify-between items-center px-4">
+    <div className="min-h-screen md-p-4 bg-white overflow-auto">
+      <div className="max-w-sm mx-auto shadow-custom mt-[45px] pt-[60px]  min-h-[calc(100vh-45px)]">
+        <div className="flex justify-between items-center px-4">
           <h3 className="font-poppins text-[26px] font-semibold leading-[30.88px] text-center text-[#253C82]">
             Offers For You
           </h3>
@@ -34,26 +34,28 @@ const Offers = () => {
         </div>
 
         {/* Collapseable Cards */}
-        <div className="mt-[40px] mb-[30px]">
-          <CollapsibleCard
-            title="Personal Loan"
-            subtitle="3 Offers"
-            offersData={offersData}
-          />
-        </div>
-        <div className="my-5 mb-[30px]">
-          <CollapsibleCard
-            title="Personal Loan"
-            subtitle="3 Offers"
-            offersData={offersData}
-          />
-        </div>
-        <div className="my-5 mb-[30px]">
-          <CollapsibleCard
-            title="Personal Loan"
-            subtitle="3 Offers"
-            offersData={offersData}
-          />
+        <div className="mt-[20px] p-4">
+          <div className="mb-[30px]">
+            <CollapsibleCard
+              title="Personal Loan"
+              subtitle="3 Offers"
+              offersData={offersData}
+            />
+          </div>
+          <div className="my-5 mb-[30px]">
+            <CollapsibleCard
+              title="Vehicle Loan"
+              subtitle="3 Offers"
+              offersData={offersData}
+            />
+          </div>
+          <div>
+            <CollapsibleCard
+              title="Home Loan"
+              subtitle="3 Offers"
+              offersData={offersData}
+            />
+          </div>
         </div>
       </div>
     </div>
