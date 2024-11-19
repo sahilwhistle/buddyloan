@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Input from "../forms/Input";
-import Image from "next/image";
 import Link from "next/link";
 import { FieldName, useFormValidation } from "@/hooks/useFormValidation";
+import { IMAGE_PATH } from "@/constants/constants";
 
 const Login = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
@@ -81,7 +81,7 @@ const Login = () => {
         <div className="flex justify-center my-4 pb-3">
           <Link href={"/"}>
             <img
-              src="/assets/img/buddyloan.png"
+              src={`${IMAGE_PATH}/buddyloan.png`}
               width={150}
               height={50}
               className="w-[150px] h-[60px]"
@@ -157,6 +157,7 @@ const Login = () => {
                      : "bg-gray opacity-50 cursor-not-allowed"
                  }
               `}
+              disabled={!formData.terms}
             >
               submit
             </button>
