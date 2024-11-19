@@ -2,7 +2,7 @@
 import React from "react";
 import { applicationData, offersDataTwo } from "../../mock/application";
 import AppCard from "../../components/common/AppCard";
-import Offers from "../../components/common/Offers";
+import OffersCardTwo from "../../components/common/OffersCardTwo";
 import DropdownTwo from "../../components/common/DropwdownTwo";
 
 const LoanStatus = () => {
@@ -40,13 +40,12 @@ const LoanStatus = () => {
         {/* Divider */}
         <div className="border border-[#A8A7A7] border-[0.2px] w-full"></div>
 
-        {/*  */}
         <div className="my-3 flex justify-center">
           <h5 className="font-bold text-[#253C82]">Other Available Offers</h5>
         </div>
 
-        {/* Offers */}
-        <Offers data={offersDataTwo} />
+        {/* OffersCardTwo */}
+        <OffersCardTwo data={offersDataTwo} />
       </div>
     </div>
   );
