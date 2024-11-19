@@ -11,7 +11,7 @@ const Login = () => {
   const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
 
   // Specify only the fields you want to validate
-  const fields = ["mobileNumber", "otp"] as any;
+  const fields = ["mobileNumber", "otp", "terms"] as any;
 
   const {
     handleSubmit,
@@ -56,7 +56,7 @@ const Login = () => {
   // Handle form checkbox field change by updating only the specific field in formData
   const handleCheck =
     (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(field as any, e.target.value);
+      setValue(field as any, e.target.checked); // Use e.target.checked for checkboxes
       trigger(field as any);
     };
 
@@ -93,20 +93,22 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-2">
             <Input
-              type="text"
+              type="number"
               placeholder="Mobile Number"
               value={watch("mobileNumber") || ""}
               onChange={handleChange("mobileNumber")}
+              maxLength={10}
               error={errors.mobileNumber?.message}
             />
           </div>
           {/* Email OTP */}
           <div className="py-3">
             <Input
-              type="text"
+              type="number"
               placeholder="Enter OTP"
               value={watch("otp") || ""}
               onChange={handleChange("otp")}
+              maxLength={6}
               error={errors.otp?.message}
             />
             <div className="flex flex-col items-end">

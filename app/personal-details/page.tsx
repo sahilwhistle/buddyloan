@@ -33,7 +33,8 @@ const PersonalDetails = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
   const [timer, setTimer] = useState(10); // 10-second timer
   const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
-  const [submitted, setSubmitted] = useState(false); // Track form submission
+
+  const formData = watch();
 
   // Handle form field change
   const handleChange =
@@ -45,7 +46,7 @@ const PersonalDetails = () => {
   // Handle form checkbox field change by updating only the specific field in formData
   const handleCheck =
     (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(field as any, e.target.value);
+      setValue(field as any, e.target.checked);
       trigger(field as any);
     };
 
@@ -273,7 +274,12 @@ const PersonalDetails = () => {
             <div className="py-3 flex justify-center">
               <button
                 type="submit"
-                className="w-[200px] py-2 px-2 bg-b-blue text-white font-poppins text-lg font-semibold rounded-xl"
+                className={`w-[200px] py-2 px-2 bg-b-blue text-white font-poppins text-lg font-semibold rounded-xl  ${
+                  formData.terms
+                    ? "text-white shadow-custom"
+                    : "bg-gray opacity-50 cursor-not-allowed"
+                }`}
+                disabled={!formData.terms}
               >
                 Submit
               </button>

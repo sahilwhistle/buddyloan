@@ -16,7 +16,7 @@ const Header = () => {
       img: "home.png",
       alt: "Home",
       label: "Home",
-      url: "/",
+      url: "/dashboard",
     }, // need to update this url
     {
       id: 2,
@@ -97,11 +97,13 @@ const Header = () => {
           </div>
 
           <div>
-            <img
-              src={`${IMAGE_PATH}/notification.png`}
-              className="h-6 w-6"
-              alt="Notification"
-            />
+            <Link href="/notifications">
+              <img
+                src={`${IMAGE_PATH}/notification.png`}
+                className="h-6 w-6"
+                alt="Notification"
+              />
+            </Link>
           </div>
         </div>
 
