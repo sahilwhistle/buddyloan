@@ -49,10 +49,10 @@ const BankAccountForm: React.FC = () => {
         />
       </div>
 
-      {/* Dropdown for Tenure */}
+      {/* Dropdown for select bank */}
       <div className="py-2">
         <Dropdown
-          label="Select Tenure"
+          label="Select Your Bank"
           options={["Option 1", "Option 2", "Option 3"]}
           selected={watch("tenure") || ""}
           onChange={(value) => handleDropdownChange("tenure", value)}
@@ -79,6 +79,7 @@ const BankAccountForm: React.FC = () => {
           placeholder="IFSC Number"
           value={watch("ifscNumber") || ""}
           onChange={handleChange("ifscNumber")}
+          maxLength={11}
           error={errors.ifscNumber?.message}
         />
       </div>
