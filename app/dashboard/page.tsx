@@ -1,15 +1,25 @@
+"use client";
 import React from "react";
-import LoanStatusChart from "../../components/common/LoanStatusChart";
 import FeaturesCard from "../../components/common/FeaturesCard";
+import DonutChart from "../../components/common/DonutChart";
 
 const Dashboard = () => {
-  const loanSeries = [50, 25, 13, 12];
-  const loanLabels = [
-    "Loan Approved",
-    "Loan Disbursal",
-    "Loan Approval Pending",
-    "Loan Rejected",
-  ];
+  const chartsData = {
+    labels: [
+      "Loan Approved",
+      "Loan Disbursal",
+      "Loan Approval Pending",
+      "Loan Rejected",
+    ],
+    datasets: [
+      {
+        label: "Loan Status",
+        data: [40, 25, 20, 15], // Example data
+        backgroundColor: ["#243B81", "#8B5CF6", "#FB923C", "#EF4444"],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen p-2 bg-white overflow-auto">
@@ -48,12 +58,38 @@ const Dashboard = () => {
           </div>
 
           {/* Charts */}
-          <LoanStatusChart
-            title="Loan Status Overview"
-            series={loanSeries}
-            labels={loanLabels}
-            colors={["#0029BF", "#8E0E8B", "#FF8400", "#F20000"]} // Optional custom colors
-          />
+          <div className="mt-4 rounded-lg border-2 border-[#243B81] bg-white ps-2 p-4 shadow-md">
+            <div className="flex items-center justify-between gap-4">
+              {/* Donut Chart */}
+              <div className="w-1/2">
+                <DonutChart data={chartsData} />
+              </div>
+              <div className="w-1/2">
+                <h2 className="text-xl font-semibold text-[#243B81]">
+                  Loan Status
+                </h2>
+
+                {/* Chart Lables  */}
+                <ul className="mt-4">
+                  {chartsData.labels.map((label, index) => (
+                    <li
+                      key={label}
+                      className="mb-2 flex text-[10px] text-black items-center"
+                    >
+                      <span
+                        className="mr-2 text-black inline-block size-4 rounded-[2px]"
+                        style={{
+                          backgroundColor:
+                            chartsData.datasets[0].backgroundColor[index],
+                        }}
+                      ></span>
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         {/* Features Cards */}
         <FeaturesCard
