@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Input from "../../components/forms/Input";
-import PaymentsToggle from "../../components/common/PaymentsToogle";
+import PaymentsCard from "../../components/common/PaymentsCard";
 import Table from "../../components/common/Table";
 import BalanceCard from "../../components/common/BalenceCard";
 
@@ -68,25 +68,25 @@ const Transections = () => {
   const data = [
     {
       id: 1,
-      img: "/assets/img/corporation-bank.png",
+      img: "corporation-bank.png",
       bankName: "Bank of America",
       bankAccountNumber: "XXXXXXXXXX6438",
     },
     {
       id: 2,
-      img: "/assets/img/icici-bank.png",
+      img: "icici-bank.png",
       bankName: "ICICI BANK",
       bankAccountNumber: "XXXXXXXXXX6438",
     },
     {
       id: 3,
-      img: "/assets/img/upi-bank.png",
+      img: "upi-bank.png",
       bankName: "UPI",
       bankAccountNumber: "XXXXXXXXXX6438",
     },
     {
       id: 4,
-      img: "/assets/img/upi-bank.png",
+      img: "upi-bank.png",
       bankName: "UPI",
       bankAccountNumber: "XXXXXXXXXX6438",
     },
@@ -111,15 +111,16 @@ const Transections = () => {
           labelOneBalance={150}
           labelTwo="Validated Balance"
           labelTwoBalance={0}
+          size="small"
         />
 
         {/* Heading */}
-        <h4 className="py-2 mt-3 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
+        <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
           Default Payout Mode
         </h4>
         <div className="w-full overflow-y-auto p-2 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
           {/* Payments Toggle Button */}
-          <PaymentsToggle
+          <PaymentsCard
             data={data}
             selectedBank={formData.bankName}
             handleToggle={(value) => handleToggle("bankName", value)}
@@ -128,12 +129,12 @@ const Transections = () => {
           {/* Buttons */}
           <div className="flex items-center justify-around gap-[10px] py-2">
             <button
-              className="w-full rounded-[15px] bg-[#00A6FF] p-[10px] text-white text-sm text-semibold"
+              className="w-full rounded-[15px] bg-[#00A6FF] p-[10px] text-white text-[12px] text-semibold"
               onClick={handleAddPaymentMethod}
             >
               Add Payout Method
             </button>
-            <button className="w-full rounded-[15px] bg-[#2DC36A] p-[10px] text-white text-sm text-semibold">
+            <button className="w-full rounded-[15px] bg-[#2DC36A] p-[10px] text-white text-[12px] text-semibold">
               Withdraw
             </button>
           </div>
@@ -188,7 +189,7 @@ const Transections = () => {
         </div>
 
         {/* Payment History */}
-        <h4 className="py-2 mt-3 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
+        <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
           Payment History
         </h4>
 

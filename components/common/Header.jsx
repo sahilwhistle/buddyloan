@@ -129,7 +129,7 @@ const Header = () => {
             <div className="mt-[40px] flex flex-col items-center p-8">
               {/* Profile Img */}
               <img
-                src={`${IMAGE_PATH}/profile.png`}
+                src={`${IMAGE_PATH}/edit-profile.png`}
                 alt="profile Logo"
                 className="w-[100.77px] h-[100.77px] rounded-full"
               />

@@ -1,3 +1,4 @@
+import { IMAGE_PATH } from "@/constants/constants";
 import React from "react";
 
 // Define the interface for props
@@ -22,7 +23,7 @@ const OffersCard: React.FC<UserCardProps> = ({ data }) => {
           >
             {/* Image */}
             <div className="text-black h-[65px] w-[65px] rounded-full flex items-center justify-center">
-              <img src={img} className="h-full w-full" />
+              <img src={`${IMAGE_PATH}/${img}`} className="h-full w-full" />
             </div>
             {/* Info Section */}
             <div className="flex flex-col text-black text-sm text-center gap-1">

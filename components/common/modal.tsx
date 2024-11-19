@@ -1,5 +1,6 @@
 "use client";
 
+import { IMAGE_PATH } from "@/constants/constants";
 import { useState } from "react";
 
 interface ModalProps {
@@ -39,7 +40,10 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/* Image */}
         <div>
-          <img src="/assets/img/confirm.png" className="h-[100px] w-[206px] " />
+          <img
+            src={`${IMAGE_PATH}/confirm.png`}
+            className="h-[100px] w-[206px] "
+          />
         </div>
         {/* Title */}
         <h2 className="text-xl font-semibold mt-4 mb-4 text-b-blue max-w-[250px] text-center">

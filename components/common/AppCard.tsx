@@ -1,4 +1,5 @@
 "use client";
+import { IMAGE_PATH } from "@/constants/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -47,11 +48,11 @@ const AppCard: React.FC<AppCardProps> = ({ data }) => {
             {/* Card Header */}
             <div className="bg-gradient-to-r from-[#FFFFFF] to-[#FFC87A] flex justify-between p-1 items-center pe-3">
               <div>
-                <Image
+                <img
                   width={90}
                   height={90}
                   alt="Company Icons"
-                  src={img}
+                  src={`${IMAGE_PATH}/${img}`}
                   className="rounded-full sm:w-[50px] sm:h-[50px] w-[45px] h-[45px]"
                 />
               </div>
@@ -61,10 +62,10 @@ const AppCard: React.FC<AppCardProps> = ({ data }) => {
                   Updated On: {updateDate}
                 </span>
                 <span className="ml-2 mt-[-2px] cursor-pointer">
-                  <Image
+                  <img
                     width={14}
                     height={14}
-                    src="/assets/img/reload.png"
+                    src={`${IMAGE_PATH}/reload.png`}
                     className="w-[16px] h-[16px]"
                     alt="Refresh Icon"
                   />

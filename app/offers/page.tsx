@@ -1,8 +1,8 @@
 "use client";
+import React from "react";
 import CollapsibleCard from "@/components/common/CollapsibleCard";
 import DropdownTwo from "@/components/common/DropwdownTwo";
 import offersData from "@/mock/offersdata";
-import React, { useState } from "react";
 
 const Offers = () => {
   const timeOptions = [

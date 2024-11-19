@@ -1,3 +1,4 @@
+import { IMAGE_PATH } from "@/constants/constants";
 import Image from "next/image";
 import React from "react";
 
@@ -6,7 +7,7 @@ interface OfferDetailProps {
   value: string | number;
 }
 
-const OfferDetail: React.FC<OfferDetailProps> = ({ label, value }) => {
+const OfferDetails: React.FC<OfferDetailProps> = ({ label, value }) => {
   return (
     <div className="flex items-baseline text-black">
       <span className="font-medium text-[12px]">{label}</span>
@@ -49,8 +50,8 @@ const Offers: React.FC<OffersProps> = ({ data }) => {
             <div className="flex justify-between">
               {/* Product Image and Name */}
               <div className="flex">
-                <Image
-                  src={productImage}
+                <img
+                  src={`${IMAGE_PATH}/${productImage}`}
                   alt="Product Image"
                   width={50}
                   height={50}
@@ -69,13 +70,12 @@ const Offers: React.FC<OffersProps> = ({ data }) => {
               </div>
 
               {/* Divider */}
-              {/* <div className="border-r-2 border-gray-900 h-full ml-auto"></div> */}
               <div className="border-r-[0.2px] border-[#A8A7A7]"></div>
 
               {/* Offer Details (ROI & Earning) */}
               <div className="flex flex-col justify-end items-end mx-2 ps-3">
                 {offerDetails.map((detail, index) => (
-                  <OfferDetail
+                  <OfferDetails
                     key={index}
                     label={detail.label}
                     value={detail.value}
