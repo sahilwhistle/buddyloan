@@ -1,3 +1,4 @@
+import { IMAGE_PATH } from "@/constants/constants";
 import React, { useState, useRef, useEffect, FC } from "react";
 
 interface CalendarInputProps {
@@ -113,7 +114,10 @@ const CalendarInput: FC<CalendarInputProps> = ({
           onClick={() => setIsOpen(!isOpen)}
           className="ml-auto flex items-center justify-center"
         >
-          <img src="/assets/img/calendar.png" className="h-[22px] w-[22px]" />
+          <img
+            src={`${IMAGE_PATH}/calendar.png`}
+            className="h-[22px] w-[22px]"
+          />
         </button>
       </div>
 

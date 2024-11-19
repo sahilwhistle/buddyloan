@@ -1,7 +1,8 @@
 "use client";
+import { IMAGE_PATH } from "@/constants/constants";
 import React from "react";
 
-interface PaymentsToggleProps {
+interface PaymentsCardProps {
   data: {
     id: any;
     img: string;
@@ -12,7 +13,7 @@ interface PaymentsToggleProps {
   handleToggle: (id: string) => void;
 }
 
-const PaymentsToggle: React.FC<PaymentsToggleProps> = ({
+const PaymentsCard: React.FC<PaymentsCardProps> = ({
   data,
   selectedBank,
   handleToggle,
@@ -29,7 +30,7 @@ const PaymentsToggle: React.FC<PaymentsToggleProps> = ({
               <div className="flex-shrink-0">
                 <img
                   className="h-14 w-14 rounded-[4px]"
-                  src={bank.img}
+                  src={`${IMAGE_PATH}/${bank.img}`}
                   alt={`${bank.bankName} logo`}
                 />
               </div>
@@ -49,8 +50,8 @@ const PaymentsToggle: React.FC<PaymentsToggleProps> = ({
                 <input
                   type="checkbox"
                   value={bank.id}
-                  checked={selectedBank === bank.bankName}
-                  onChange={() => handleToggle(bank.bankName)}
+                  checked={selectedBank === bank.id}
+                  onChange={() => handleToggle(bank.id)}
                   className="peer sr-only w-3 h-3 border border-transparent rounded-sm appearance-none checked:bg-red-500 checked:border-red-500 focus:ring-0"
                 />
 
@@ -64,4 +65,4 @@ const PaymentsToggle: React.FC<PaymentsToggleProps> = ({
   );
 };
 
-export default PaymentsToggle;
+export default PaymentsCard;

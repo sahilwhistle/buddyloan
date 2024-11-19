@@ -57,12 +57,12 @@ const Dashboard = () => {
         </div>
         {/* Features Cards */}
         <FeaturesCard
-          img="/assets/img/rupees.png"
+          img="rupees.png"
           message="Earn extra 1% on disbursal today"
         />
 
         <FeaturesCard
-          img="/assets/img/tata.png"
+          img="tata.png"
           message="New Partner Tata Capital Added in lender list with record disbursal TAT of 10 mins."
           text="small"
         />

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { applicationData, offersData } from "../../mock/application";
+import { applicationData, offersDataTwo } from "../../mock/application";
 import AppCard from "../../components/common/AppCard";
 import Offers from "../../components/common/Offers";
 import DropdownTwo from "../../components/common/DropwdownTwo";
@@ -25,7 +25,7 @@ const LoanStatus = () => {
         </h3>
 
         {/* Dropdown */}
-        <div className="flex justify-end items-end mb-4">
+        <div className="flex justify-end items-end mt-4 mb-5">
           <DropdownTwo
             label="All Time"
             options={timeOptions}
@@ -46,7 +46,7 @@ const LoanStatus = () => {
         </div>
 
         {/* Offers */}
-        <Offers data={offersData} />
+        <Offers data={offersDataTwo} />
       </div>
     </div>
   );

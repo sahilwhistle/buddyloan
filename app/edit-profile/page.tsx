@@ -4,6 +4,7 @@ import Input from "../../components/forms/Input";
 import CalendarInput from "../../components/common/CalendarInput";
 import Dropdown from "../../components/common/Dropdown";
 import { FieldName, useFormValidation } from "../../hooks/useFormValidation";
+import { IMAGE_PATH } from "@/constants/constants";
 
 const EditProfile = () => {
   // Specify only the fields you want to validate
@@ -55,12 +56,12 @@ const EditProfile = () => {
           <div className="relative h-[140px] w-[140px]">
             {/* Profile img */}
             <img
-              src="/assets/img/edit-profile.png"
+              src={`${IMAGE_PATH}/edit-profile.png`}
               className="h-[140px] w-[140px]"
             />
             {/* Camera img */}
             <img
-              src="/assets/img/camera.png"
+              src={`${IMAGE_PATH}/camera.png`}
               className=" h-[34.41px] w-[34.41px] absolute bottom-[0px] right-[0px]"
             />
           </div>

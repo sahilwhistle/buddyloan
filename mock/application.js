@@ -1,7 +1,7 @@
 export const applicationData = [
   {
     id: 1,
-    img: "/assets/img/m-pocket.png",
+    img: "m-pocket.png",
     company: "mPokket",
     updateDate: "2024-06-11",
     loanAmount: 50000,
@@ -11,7 +11,7 @@ export const applicationData = [
   },
   {
     id: 2,
-    img: "/assets/img/kreditbee.png",
+    img: "kreditbee.png",
     company: "KreditBee",
     updateDate: "2024-09-11",
     loanAmount: 50000,
@@ -21,11 +21,11 @@ export const applicationData = [
   },
 ];
 
-export const offersData = [
+export const offersDataTwo = [
   {
     id: 1,
     offersType: "Vehicle Loan",
-    productImage: "/assets/img/kreditbee.png",
+    productImage: "kreditbee.png",
     productName: "Google",
     offerStatus: "Proceed",
     offerROI: "2%",
@@ -34,7 +34,7 @@ export const offersData = [
   {
     id: 2,
     offersType: "Vehicle Loan",
-    productImage: "/assets/img/kreditbee.png",
+    productImage: "kreditbee.png",
     productName: "Facebook",
     offerStatus: "Proceed",
     offerROI: "10%",

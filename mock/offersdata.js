@@ -2,7 +2,7 @@ const offersData = [
   {
     id: 1,
     userName: "Sam",
-    img: "/assets/img/m-pocket.png",
+    img: "m-pocket.png",
     phoneNumber: "9898989898",
     roi: "10%",
     earnings: "1%",
@@ -11,7 +11,7 @@ const offersData = [
   {
     id: 2,
     userName: "Jhon",
-    img: "/assets/img/kreditbee.png",
+    img: "kreditbee.png",
     phoneNumber: "9898989898",
     roi: "10%",
     earnings: "1%",
@@ -20,7 +20,7 @@ const offersData = [
   {
     id: 3,
     userName: "Rohit",
-    img: "/assets/img/m-pocket.png",
+    img: "m-pocket.png",
     phoneNumber: "9898989898",
     roi: "10%",
     earnings: "1%",
@@ -29,7 +29,7 @@ const offersData = [
   {
     id: 4,
     userName: "Abhilash",
-    img: "/assets/img/kreditbee.png",
+    img: "kreditbee.png",
     phoneNumber: "9898989898",
     roi: "10%",
     earnings: "1%",
@@ -38,7 +38,7 @@ const offersData = [
   {
     id: 5,
     userName: "Pradeep",
-    img: "/assets/img/m-pocket.png",
+    img: "m-pocket.png",
     phoneNumber: "9898989898",
     roi: "10%",
     earnings: "1%",
