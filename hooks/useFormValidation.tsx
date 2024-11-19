@@ -56,7 +56,26 @@ const fieldSchemas = {
     .min(2, "City name is required")
     .max(30, "City name is too long"),
 
-  email: z.string().email("Invalid email address").min(5, "Email is required"),
+  // email: z.string().email("Invalid email address").min(5, "Email is required"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .min(5, "Email is required")
+    .refine(
+      (email) => {
+        // Define blocked domains
+        const blockedDomains = ["test.com", "testing.com", "example.com"]; // Add blocked domains
+
+        // Check against blocked domains
+        const domain = email.split("@")[1]; // Extract domain from email
+        const isBlockedDomain = blockedDomains.includes(domain);
+
+        return !isBlockedDomain;
+      },
+      {
+        message: "This email address is not allowed.",
+      }
+    ),
 
   companyName: z
     .string()

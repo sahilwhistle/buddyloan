@@ -115,6 +115,7 @@ const Registration = () => {
               placeholder="PAN Number"
               value={watch("panNumber") || ""}
               onChange={handleChange("panNumber")}
+              maxLength={10} // Allow only 10 characters
               error={errors.panNumber?.message}
             />
           </div>
@@ -145,10 +146,11 @@ const Registration = () => {
           {/* Pincode */}
           <div className="py-3 mt-3">
             <Input
-              type="text"
+              type="number"
               placeholder="Pincode"
               value={watch("pincode") || ""}
               onChange={handleChange("pincode")}
+              maxLength={6} // Allow only 6 characters
               error={errors.pincode?.message}
             />
           </div>
@@ -191,10 +193,11 @@ const Registration = () => {
           {isOTPSent && (
             <div className="py-3">
               <Input
-                type="text"
+                type="number"
                 placeholder="Email OTP"
                 value={watch("otp") || ""}
                 onChange={handleChange("otp")}
+                maxLength={6} // Allow only 6 characters
                 error={errors.otp?.message}
               />
             </div>

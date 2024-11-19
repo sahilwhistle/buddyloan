@@ -63,10 +63,11 @@ const BankAccountForm: React.FC = () => {
       {/* Account Number */}
       <div className="mt-5 py-3">
         <Input
-          type="text"
+          type="number"
           placeholder="Account Number"
           value={watch("accountNumber") || ""}
           onChange={handleChange("accountNumber")}
+          maxLength={16}
           error={errors.accountNumber?.message}
         />
       </div>

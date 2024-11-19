@@ -141,7 +141,7 @@ const SelfEmployedDetails = () => {
             {/* Annual Turnover */}
             <div className="py-3">
               <Input
-                type="text"
+                type="number"
                 placeholder="Annual Turnover"
                 value={watch("annualTurnover") || ""}
                 onChange={handleChange("annualTurnover")}
@@ -192,6 +192,7 @@ const SelfEmployedDetails = () => {
               placeholder="GST Number"
               value={watch("gstNumber") || ""}
               onChange={handleChange("gstNumber")}
+              maxLength={15}
               error={errors.gstNumber?.message}
             />
           </div>

@@ -125,10 +125,11 @@ const PersonalDetails = () => {
           {/* Phone Number */}
           <div className="py-3">
             <Input
-              type="text"
+              type="number"
               placeholder="Phone Number"
               value={watch("mobileNumber") || ""}
               onChange={handleChange("mobileNumber")}
+              maxLength={10} // Allow only 10 characters
               error={errors.mobileNumber?.message}
             />
           </div>
@@ -142,10 +143,11 @@ const PersonalDetails = () => {
               error={errors.email?.message}
             />
             <Input
-              type="text"
+              type="number"
               placeholder="Pincode"
               value={watch("pincode") || ""}
               onChange={handleChange("pincode")}
+              maxLength={6} // Allow only 6 characters
               error={errors.pincode?.message}
             />
           </div>
@@ -181,6 +183,7 @@ const PersonalDetails = () => {
               placeholder="Pan Number"
               value={watch("panNumber") || ""}
               onChange={handleChange("panNumber")}
+              maxLength={10} // Allow only 10 characters
               error={errors.panNumber?.message}
             />
           </div>
@@ -233,10 +236,11 @@ const PersonalDetails = () => {
           {isOTPSent && (
             <div className="mt-5 py-3">
               <Input
-                type="text"
+                type="number"
                 placeholder="Enter OTP"
                 value={watch("otp") || ""}
                 onChange={handleChange("otp")}
+                maxLength={6}
                 error={errors.otp?.message}
               />
               <div className="flex flex-col items-end mt-1">

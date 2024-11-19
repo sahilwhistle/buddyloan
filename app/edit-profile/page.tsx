@@ -87,6 +87,7 @@ const EditProfile = () => {
               placeholder="PAN Number"
               value={watch("panNumber") || ""}
               onChange={handleChange("panNumber")}
+              maxLength={10} // Allow only 10 characters
               error={errors.panNumber?.message}
             />
           </div>
