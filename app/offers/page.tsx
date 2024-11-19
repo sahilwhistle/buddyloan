@@ -33,7 +33,7 @@ const Offers = () => {
           />
         </div>
 
-        {/* Collapseable Cards */}
+        {/* Collapsible Cards */}
         <div className="mt-[20px] p-4">
           <div className="mb-[30px]">
             <CollapsibleCard

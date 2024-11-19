@@ -21,6 +21,16 @@ const Dashboard = () => {
     ],
   };
 
+  const notificationData = [
+    { id: 1, img: "rupees.png", message: "Earn extra 1% on disbursal today" },
+    {
+      id: 2,
+      img: "tata.png",
+      message:
+        "New Partner Tata Capital Added in lender list with record disbursal TAT of 10 mins.",
+    },
+  ];
+
   return (
     <div className="min-h-screen p-2 bg-white overflow-auto">
       <div className="max-w-sm mx-auto mt-[80px]">
@@ -92,16 +102,17 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Features Cards */}
-        <FeaturesCard
-          img="rupees.png"
-          message="Earn extra 1% on disbursal today"
-        />
-
-        <FeaturesCard
-          img="tata.png"
-          message="New Partner Tata Capital Added in lender list with record disbursal TAT of 10 mins."
-          text="small"
-        />
+        {notificationData?.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <FeaturesCard
+                id={item.id}
+                img={item.img}
+                message={item.message}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
