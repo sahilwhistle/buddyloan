@@ -1,5 +1,4 @@
 import { IMAGE_PATH } from "@/constants/constants";
-import Image from "next/image";
 import React from "react";
 
 interface OfferDetailProps {
@@ -21,7 +20,7 @@ interface OffersProps {
   data: any;
 }
 
-const Offers: React.FC<OffersProps> = ({ data }) => {
+const OffersCardTwo: React.FC<OffersProps> = ({ data }) => {
   return (
     <>
       {data?.map((item: any, index: any) => {
@@ -90,4 +89,4 @@ const Offers: React.FC<OffersProps> = ({ data }) => {
   );
 };
 
-export default Offers;
+export default OffersCardTwo;

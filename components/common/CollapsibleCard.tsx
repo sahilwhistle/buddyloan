@@ -41,7 +41,7 @@ const CollapsibleCard: React.FC<CollapsibleCardProps> = ({
           isOpen ? "max-h-[200px]" : "max-h-0"
         }`}
       >
-        {/* Offerscard */}
+        {/* Offers Card */}
         <div className="px-2 overflow-auto max-h-[200px]">
           <OffersCard data={offersData} />
         </div>
