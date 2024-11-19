@@ -47,10 +47,11 @@ const UPIForm: React.FC = () => {
       </div>
       <div className="py-3">
         <Input
-          type="text"
-          placeholder="Mobile Number"
+          type="number"
+          placeholder="Mobile Numbers"
           value={watch("mobileNumber") || ""}
           onChange={handleChange("mobileNumber")}
+          maxLength={10} // Allow only 6 characters
           error={errors.mobileNumber?.message}
         />
       </div>

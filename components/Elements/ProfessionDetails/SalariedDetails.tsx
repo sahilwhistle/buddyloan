@@ -93,7 +93,7 @@ const SalariedDetails = () => {
         {/* Monthly Income */}
         <div className="py-3">
           <Input
-            type="text"
+            type="number"
             placeholder="Monthly Income"
             value={watch("monthlyIncome") || ""}
             onChange={handleChange("monthlyIncome")}
@@ -101,7 +101,7 @@ const SalariedDetails = () => {
           />
         </div>
 
-        {/* Adress */}
+        {/* Address */}
         <div className="py-3">
           <Input
             type="text"
@@ -115,10 +115,11 @@ const SalariedDetails = () => {
         {/* Pincode */}
         <div className="py-3">
           <Input
-            type="text"
+            type="number"
             placeholder="Company PIN Code"
             value={watch("pincode") || ""}
             onChange={handleChange("pincode")}
+            maxLength={6}
             error={errors.pincode?.message}
           />
         </div>

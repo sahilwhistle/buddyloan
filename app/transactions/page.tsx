@@ -140,7 +140,7 @@ const Transections = () => {
           </div>
 
           <div className="flex justify-between items-center gap-5">
-            {/* Email OTP */}
+            {/* OTP */}
             {isOTPSent && (
               <div className="mt-5 py-3">
                 <Input
@@ -148,6 +148,7 @@ const Transections = () => {
                   placeholder="Enter OTP"
                   value={formData.otp}
                   onChange={handleChange("otp")}
+                  maxLength={6} // Allow only 10 characters
                 />
                 <div className="flex flex-col items-end mt-1">
                   {isTimerActive ? (
@@ -157,7 +158,7 @@ const Transections = () => {
                           {timer}s
                         </span>
                         <span className="font-poppins text-xs font-medium text-gray-500">
-                          Re-send Email OTP
+                          Re-send OTP
                         </span>
                       </div>
                     </>
@@ -166,7 +167,7 @@ const Transections = () => {
                       onClick={handleSendOTP}
                       className="font-poppins text-xs font-medium text-b-blue cursor-pointer"
                     >
-                      Send Email OTP
+                      Send OTP
                     </span>
                   )}
                 </div>
