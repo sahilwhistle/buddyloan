@@ -141,7 +141,7 @@ const Transections = () => {
             </div>
 
             <div className="flex justify-between items-start gap-5 mt-5">
-              {/* OTP */}
+              {/* OTP Input */}
               {isOTPSent && (
                 <OtpInput
                   isOtp={isOTPSent}

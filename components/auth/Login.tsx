@@ -4,11 +4,10 @@ import Input from "../forms/Input";
 import Link from "next/link";
 import { FieldName, useFormValidation } from "@/hooks/useFormValidation";
 import { IMAGE_PATH } from "@/constants/constants";
+import OtpInput from "../common/OtpInput";
 
 const Login = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
-  const [timer, setTimer] = useState(10); // 10-second timer
-  const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
 
   // Specify only the fields you want to validate
   const fields = ["mobileNumber", "otp", "terms"] as any;
@@ -30,27 +29,9 @@ const Login = () => {
       trigger(field as any);
     };
 
-  // Start countdown timer after OTP is sent
-  useEffect(() => {
-    if (isTimerActive && timer > 0) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-
-      // Cleanup interval on unmount or when timer ends
-      return () => clearInterval(intervalId);
-    }
-
-    if (timer === 0) {
-      setIsTimerActive(false);
-    }
-  }, [isTimerActive, timer]);
-
   const handleSendOTP = () => {
     // Reset the timer and start the countdown
     setIsOTPSent(true);
-    setTimer(15); // reset timer to 15 seconds
-    setIsTimerActive(true);
   };
 
   // Handle form checkbox field change by updating only the specific field in formData
@@ -91,6 +72,7 @@ const Login = () => {
         </div>
         {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Mobile Number */}
           <div className="py-2">
             <Input
               type="number"
@@ -101,38 +83,16 @@ const Login = () => {
               error={errors.mobileNumber?.message}
             />
           </div>
-          {/* Email OTP */}
+          {/* OTP Input */}
           <div className="py-3">
-            <Input
-              type="number"
+            <OtpInput
+              isOtp={isOTPSent}
               placeholder="Enter OTP"
-              value={watch("otp") || ""}
+              onSendOTP={handleSendOTP}
+              otpValue={watch("otp") || ""}
               onChange={handleChange("otp")}
-              maxLength={6}
               error={errors.otp?.message}
             />
-            <div className="flex flex-col items-end">
-              {isTimerActive ? (
-                <div className="flex flex-col text-center">
-                  <span className="font-poppins text-xs font-semibold text-b-blue">
-                    {timer}s
-                  </span>
-                  <span
-                    className="text-xs text-gray-400"
-                    onClick={handleSendOTP}
-                  >
-                    Resend OTP
-                  </span>
-                </div>
-              ) : (
-                <span
-                  onClick={handleSendOTP}
-                  className="font-poppins text-xs font-medium text-b-blue cursor-pointer"
-                >
-                  Send OTP
-                </span>
-              )}
-            </div>
           </div>
 
           {/* Terms & Conditions */}

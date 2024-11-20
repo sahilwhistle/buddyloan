@@ -162,7 +162,7 @@ const Registration = () => {
             </div>
           </div>
 
-          {/* OTP input (conditional rendering after OTP is sent) */}
+          {/* OTP input  */}
           {isOTPSent && (
             <div className="py-3">
               <OtpInput
