@@ -1,59 +1,49 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Input from "../../components/forms/Input";
+import React, { useState } from "react";
 import PaymentsCard from "../../components/common/PaymentsCard";
 import Table from "../../components/common/Table";
 import BalanceCard from "../../components/common/BalenceCard";
+import { FieldName, useFormValidation } from "@/hooks/useFormValidation";
+import OtpInput from "@/components/common/OtpInput";
 
 const Transections = () => {
   const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
-  const [timer, setTimer] = useState(10); // 10-second timer
-  const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
 
   // State object to hold all form data
   const [formData, setFormData] = useState({
+    bankId: 1,
     otp: "",
-    bankName: "",
   });
 
-  // Start countdown timer after OTP is sent
-  useEffect(() => {
-    if (isTimerActive && timer > 0) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
+  const fields = ["otp"] as any;
 
-      // Cleanup interval on unmount or when timer ends
-      return () => clearInterval(intervalId);
-    }
-
-    if (timer === 0) {
-      setIsTimerActive(false);
-    }
-  }, [isTimerActive, timer, isOTPSent]);
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setValue,
+    watch,
+    trigger,
+  } = useFormValidation(fields);
 
   // Handle form field change by updating only the specific field in formData
   const handleChange =
-    (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-        ...formData,
-        [field]: e.target.value,
-      });
+    (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(field as any, e.target.value);
+      trigger(field as any);
     };
 
+  // Handle send otp
   const handleSendOTP = () => {
     // Reset the timer and start the countdown
     setIsOTPSent(true);
-    setTimer(15); // reset timer to 15 seconds
-    setIsTimerActive(true);
   };
 
-  const handleAddPaymentMethod = () => {
+  // Handle withdraw
+  const handleWithdraw = () => {
     setIsOTPSent(true);
-    setTimer(15);
-    setIsTimerActive(true);
   };
 
+  // Handle toogle
   const handleToggle = (field: string, value: string) => {
     setFormData({
       ...formData,
@@ -61,8 +51,13 @@ const Transections = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted Data:", formData); // Log collected form data
+  // Handle form submission
+  const onSubmit = async (data: any) => {
+    try {
+      console.log("Form submitted successfully:", data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   const data = [
@@ -105,97 +100,81 @@ const Transections = () => {
   return (
     <div className="min-h-screen p-4 bg-white">
       <div className="max-w-sm mx-auto">
-        {/* Header Banner */}
-        <BalanceCard
-          labelOne="Validated Balance"
-          labelOneBalance={150}
-          labelTwo="Validated Balance"
-          labelTwoBalance={0}
-          size="small"
-        />
-
-        {/* Heading */}
-        <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
-          Default Payout Mode
-        </h4>
-        <div className="w-full overflow-y-auto p-2 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
-          {/* Payments Toggle Button */}
-          <PaymentsCard
-            data={data}
-            selectedBank={formData.bankName}
-            handleToggle={(value) => handleToggle("bankName", value)}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Header Banner */}
+          <BalanceCard
+            labelOne="Validated Balance"
+            labelOneBalance={150}
+            labelTwo="Validated Balance"
+            labelTwoBalance={0}
+            size="small"
           />
 
-          {/* Buttons */}
-          <div className="flex items-center justify-around gap-[10px] py-2">
-            <button
-              className="w-full rounded-[15px] bg-[#00A6FF] p-[10px] text-white text-[12px] text-semibold"
-              onClick={handleAddPaymentMethod}
-            >
-              Add Payout Method
-            </button>
-            <button className="w-full rounded-[15px] bg-[#2DC36A] p-[10px] text-white text-[12px] text-semibold">
-              Withdraw
-            </button>
-          </div>
+          {/* Heading */}
+          <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
+            Default Payout Mode
+          </h4>
+          <div className="w-full overflow-y-auto p-2 bg-white rounded-[14px] max-w-sm mx-auto border border-gray-100 shadow-custom">
+            {/* Payments Card With Toggle Button */}
+            <PaymentsCard
+              data={data}
+              selectedBank={formData.bankId}
+              handleToggle={(value) => handleToggle("bankId", value)}
+            />
 
-          <div className="flex justify-between items-center gap-5">
-            {/* OTP */}
-            {isOTPSent && (
-              <div className="mt-5 py-3">
-                <Input
-                  type="text"
+            {/* Payout & WUthdraw Buttons*/}
+            <div className="flex items-center justify-around gap-[10px] py-2">
+              <button
+                type="button"
+                className="w-full rounded-[15px] bg-[#00A6FF] p-[10px] text-white text-[12px] text-semibold"
+              >
+                Add Payout Method
+              </button>
+
+              <button
+                onClick={handleWithdraw}
+                className="w-full rounded-[15px] bg-[#2DC36A] p-[10px] text-white text-[12px] text-semibold"
+                type="button"
+              >
+                Withdraw
+              </button>
+            </div>
+
+            <div className="flex justify-between items-start gap-5 mt-5">
+              {/* OTP */}
+              {isOTPSent && (
+                <OtpInput
+                  isOtp={isOTPSent}
                   placeholder="Enter OTP"
-                  value={formData.otp}
+                  onSendOTP={handleSendOTP}
+                  otpValue={watch("otp") || ""}
                   onChange={handleChange("otp")}
-                  maxLength={6} // Allow only 10 characters
+                  error={errors.otp?.message}
                 />
-                <div className="flex flex-col items-end mt-1">
-                  {isTimerActive ? (
-                    <>
-                      <div className="flex flex-col items-center mt-1">
-                        <span className="font-poppins text-xs font-medium text-b-blue mt-1 text-center">
-                          {timer}s
-                        </span>
-                        <span className="font-poppins text-xs font-medium text-gray-500">
-                          Re-send OTP
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <span
-                      onClick={handleSendOTP}
-                      className="font-poppins text-xs font-medium text-b-blue cursor-pointer"
-                    >
-                      Send OTP
-                    </span>
-                  )}
+              )}
+
+              {/* Submit Button */}
+              {isOTPSent && (
+                <div className="flex justify-center">
+                  <button
+                    type="submit"
+                    className="w-[120px] py-2 mt-[2px] px-2 bg-b-blue text-white font-poppins text-md font-semibold rounded-xl"
+                  >
+                    Submit
+                  </button>
                 </div>
-              </div>
-            )}
-
-            {/* Submit Button */}
-            {isOTPSent && (
-              <div className="flex justify-center mt-[-12px]">
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="w-[120px] py-3 px-2 bg-b-blue text-white font-poppins text-md font-semibold rounded-xl"
-                >
-                  Submit
-                </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Payment History */}
-        <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
-          Payment History
-        </h4>
+          {/* Payment History */}
+          <h4 className="py-2 mt-3 mb-2 title text-md font-normal text-gray-400 flex justify-center items-center font-poppins">
+            Payment History
+          </h4>
 
-        {/* Payment History Table */}
-        <Table data={tableData} />
+          {/* Payment History Table */}
+          <Table data={tableData} />
+        </form>
       </div>
     </div>
   );
