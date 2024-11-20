@@ -1,12 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import Input from "../../components/forms/Input";
 import Dropdown from "../../components/common/Dropdown";
 import CalendarInput from "../../components/common/CalendarInput";
 import { useFormValidation, FieldName } from "../../hooks/useFormValidation";
+import OtpInput from "@/components/common/OtpInput";
 
 const Registration = () => {
+  const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
+
   // Specify only the fields you want to validate
   const fields = [
     "fullName",
@@ -25,10 +28,6 @@ const Registration = () => {
     watch,
     trigger,
   } = useFormValidation(fields);
-
-  const [isOTPSent, setIsOTPSent] = useState(false);
-  const [timer, setTimer] = useState(10);
-  const [isTimerActive, setIsTimerActive] = useState(false);
 
   // Handle form field change
   const handleChange =
@@ -55,25 +54,8 @@ const Registration = () => {
 
     if (isEmailValid) {
       setIsOTPSent(true);
-      setTimer(15);
-      setIsTimerActive(true);
     }
   };
-
-  // Timer effect for OTP
-  useEffect(() => {
-    if (isTimerActive && timer > 0) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-
-      return () => clearInterval(intervalId);
-    }
-
-    if (timer === 0) {
-      setIsTimerActive(false);
-    }
-  }, [isTimerActive, timer]);
 
   // Handle form submission
   const onSubmit = async (data: any) => {
@@ -165,16 +147,7 @@ const Registration = () => {
               error={errors.email?.message}
             />
             <div className="flex flex-col items-end mt-1">
-              {isTimerActive ? (
-                <div className="flex flex-col items-center mt-1">
-                  <span className="font-poppins text-xs font-medium text-b-blue mt-1 text-center">
-                    {timer}s
-                  </span>
-                  <span className="font-poppins text-xs font-medium text-gray-500">
-                    Re-send Email OTP
-                  </span>
-                </div>
-              ) : (
+              {!isOTPSent && (
                 <span
                   onClick={handleSendOTP}
                   className={`font-poppins text-xs font-medium ${
@@ -189,15 +162,15 @@ const Registration = () => {
             </div>
           </div>
 
-          {/* OTP input (conditional rendering after OTP is sent) */}
+          {/* OTP input  */}
           {isOTPSent && (
             <div className="py-3">
-              <Input
-                type="number"
+              <OtpInput
+                isOtp={isOTPSent}
                 placeholder="Email OTP"
-                value={watch("otp") || ""}
+                onSendOTP={handleSendOTP}
+                otpValue={watch("otp") || ""}
                 onChange={handleChange("otp")}
-                maxLength={6} // Allow only 6 characters
                 error={errors.otp?.message}
               />
             </div>

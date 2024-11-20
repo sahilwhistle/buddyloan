@@ -1,37 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Table from "../../components/common/Table";
 import BalanceCard from "../../components/common/BalenceCard";
 import tableData from "../../mock/earnings";
 import DropdownTwo from "../../components/common/DropwdownTwo";
 
 const Earnings = () => {
-  const [isOTPSent, setIsOTPSent] = useState(false); // Track if OTP has been sent
-  const [timer, setTimer] = useState(10); // 10-second timer
-  const [isTimerActive, setIsTimerActive] = useState(false); // Track if timer is active
-
-  // State object to hold all form data
-  const [formData, setFormData] = useState({
-    otp: "",
-    bankName: "",
-  });
-
-  // Start countdown timer after OTP is sent
-  useEffect(() => {
-    if (isTimerActive && timer > 0) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-
-      // Cleanup interval on unmount or when timer ends
-      return () => clearInterval(intervalId);
-    }
-
-    if (timer === 0) {
-      setIsTimerActive(false);
-    }
-  }, [isTimerActive, timer, isOTPSent]);
-
   const timeOptions = [
     { value: "7d", label: "Last 7 Days" },
     { value: "30d", label: "Last 30 Days" },
